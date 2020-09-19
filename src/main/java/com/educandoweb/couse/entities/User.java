@@ -1,15 +1,20 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,17 +28,20 @@ public class User implements Serializable {
 	private String senhaConfirm;
 	private String descricao;
 	private Long cpf;
-	private Date dataNascimento;
-	private Date dataIntegracao;
-	private Date dataCadastro;
+	private Instant dataNascimento;
+	private Instant dataIntegracao;
+	private Instant dataCadastro;
 	private int hierarquia;
 	private int aprovado;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
 	
 	public User() {
 		
 	}
 
-	public User(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Date dataNascimento, Date dataIntegracao, Date dataCadastro, int hierarquia, int aprovado) {
+	public User(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro, int hierarquia, int aprovado) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -138,27 +146,27 @@ public class User implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Date getDataNascimento() {
+	public Instant getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(Instant dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Date getDataIntegracao() {
+	public Instant getDataIntegracao() {
 		return dataIntegracao;
 	}
 
-	public void setDataIntegracao(Date dataIntegracao) {
+	public void setDataIntegracao(Instant dataIntegracao) {
 		this.dataIntegracao = dataIntegracao;
 	}
 
-	public Date getDataCadastro() {
+	public Instant getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(Instant dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -180,6 +188,10 @@ public class User implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
@@ -206,6 +218,7 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+
 
 	
 	
