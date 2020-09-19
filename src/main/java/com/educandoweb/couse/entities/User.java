@@ -1,6 +1,7 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,24 +16,64 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String nome;
 	private String email;
-	private String phone;
-	private String password;
+	private String celular;
+	private String senha;
+	private String senhaConfirm;
+	private String descricao;
+	private Long cpf;
+	private Date dataNascimento;
+	private Date dataIntegracao;
+	private Date dataCadastro;
+	private int hierarquia;
+	private int aprovado;
 	
 	public User() {
 		
 	}
 
-	public User(Long id, String name, String email, String phone, String password) {
+	public User(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Date dataNascimento, Date dataIntegracao, Date dataCadastro, int hierarquia, int aprovado) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.email = email;
-		this.phone = phone;
-		this.password = password;
+		this.celular = celular;
+		this.senha = senha;
+		this.senhaConfirm = senhaConfirm;
+		this.descricao = descricao;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.dataIntegracao = dataIntegracao;
+		this.dataCadastro = dataCadastro;
+		this.hierarquia = hierarquia;
+		this.aprovado = aprovado;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", nome=" + nome + ", email=" + email + ", celular=" + celular + ", senha=" + senha
+				+ ", senhaConfirm=" + senhaConfirm + ", descricao=" + descricao + ", cpf=" + cpf + ", hierarquia="
+				+ hierarquia + ", aprovado=" + aprovado + "]";
 	}
 
+	public User(Long id, String nome, String email, String celular, String senha,
+			String senhaConfirm, String descricao, Long cpf, int hierarquia, int aprovado) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.celular = celular;
+		this.senha = senha;
+		this.senhaConfirm = senhaConfirm;
+		this.descricao = descricao;
+		this.cpf = cpf;
+		
+		this.hierarquia = hierarquia;
+		this.aprovado = aprovado;
+	}
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -41,12 +82,12 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -57,20 +98,88 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getCelular() {
+		return celular;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getSenhaConfirm() {
+		return senhaConfirm;
+	}
+
+	public void setSenhaConfirm(String senhaConfirm) {
+		this.senhaConfirm = senhaConfirm;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Long getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public Date getDataIntegracao() {
+		return dataIntegracao;
+	}
+
+	public void setDataIntegracao(Date dataIntegracao) {
+		this.dataIntegracao = dataIntegracao;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public int getHierarquia() {
+		return hierarquia;
+	}
+
+	public void setHierarquia(int hierarquia) {
+		this.hierarquia = hierarquia;
+	}
+
+	public int getAprovado() {
+		return aprovado;
+	}
+
+	public void setAprovado(int aprovado) {
+		this.aprovado = aprovado;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
