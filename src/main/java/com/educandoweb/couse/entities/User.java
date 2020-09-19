@@ -38,7 +38,7 @@ public class User implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<>();
+	private List<Skills> skills = new ArrayList<>();
 	
 	public User() {
 		
@@ -193,10 +193,9 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public List<Skills> getSkillss() {
+		return skills;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

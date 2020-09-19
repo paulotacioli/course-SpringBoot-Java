@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educandoweb.couse.entities.Order;
-import com.educandoweb.couse.services.OrderService;
+import com.educandoweb.couse.entities.Category;
+import com.educandoweb.couse.services.CategoryService;
 
 @RestController
-@RequestMapping(value = "/orders")
-public class OrderResouce {
+@RequestMapping(value = "/categories")
+public class CategoryResouce {
 
 	@Autowired
-	private OrderService service;
+	private CategoryService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Order>> findAll(){
-		List<Order> list = service.findAll();
+	public ResponseEntity<List<Category>> findAll(){
+		List<Category> list = service.findAll();
 		System.out.println(list.get(0).toString());
 		System.out.println("ResponseEntity.ok().body(list);"+ResponseEntity.ok().body(list));
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order obj = service.findById(id);
+	public ResponseEntity<Category> findById(@PathVariable Long id){
+		Category obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

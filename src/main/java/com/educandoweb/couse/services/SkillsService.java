@@ -6,22 +6,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.educandoweb.couse.entities.Order;
-import com.educandoweb.couse.repositores.OrderRepository;
+import com.educandoweb.couse.entities.Skills;
+import com.educandoweb.couse.repositores.SkillsRepository;
 
 @Service
-public class OrderService {
+public class SkillsService {
 	
 	@Autowired
-	private OrderRepository repository;
+	private SkillsRepository repository;
 
-	public List<Order> findAll(){
+	public List<Skills> findAll(){
 		return repository.findAll();	
 
 	}
 	
-	public Order findById(Long id) {
-		Optional<Order> obj = repository.findById(id);
+	public Skills findById(Long id) {
+		Optional<Skills> obj = repository.findById(id);
 		return obj.get();
 	}
 }
