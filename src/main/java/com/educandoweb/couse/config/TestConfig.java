@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.couse.entities.Category;
 import com.educandoweb.couse.entities.Product;
+import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.entities.User;
 import com.educandoweb.couse.repositores.CategoryRepository;
@@ -67,6 +68,11 @@ public class TestConfig implements CommandLineRunner{
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		Regiao saoPaulo = new Regiao(null, "Sao Paulo", "São josé dos Campos", u1);
+		u1.setRegiao(saoPaulo); 
+		
+		userRepository.save(u1);
 		
 	}
 
