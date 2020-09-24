@@ -6,22 +6,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.educandoweb.couse.entities.User;
-import com.educandoweb.couse.repositores.UserRepository;
+import com.educandoweb.couse.entities.Funcao;
+import com.educandoweb.couse.repositores.FuncaoRepository;
 
 @Service
-public class UserService {
+public class FuncaoService {
 	
 	@Autowired
-	private UserRepository repository;
+	private FuncaoRepository repository;
 
-	public List<User> findAll(){
+	public List<Funcao> findAll(){
 		return repository.findAll();	
 
 	}
 	
-	public User findById(Long id) {
-		Optional<User> obj = repository.findById(id);
+	public Funcao findById(Long id) {
+		Optional<Funcao> obj = repository.findById(id);
 		return obj.get();
 	}
 }

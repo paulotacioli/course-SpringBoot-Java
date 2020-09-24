@@ -26,17 +26,17 @@ public class Skills implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private User client;
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
 
 	public Skills() {
 	}
 
-	public Skills(Long id, String skill, User client) {
+	public Skills(Long id, String skill, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.skill= skill;
-		this.client = client;
+		this.funcionario = funcionario;
 	}
 	
 	@Override
@@ -80,12 +80,12 @@ public class Skills implements Serializable {
 		this.skill = skill;
 	}
 
-	public User getClient() {
-		return client;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setClient(User client) {
-		this.client = client;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	public static long getSerialversionuid() {

@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
+@Table(name = "tb_funcionario")
+public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -39,17 +42,22 @@ public class User implements Serializable {
 	private int aprovado;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "funcionario")
 	private List<Skills> skills = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "func_id")
+	private Funcionario func;
+	
+	@OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private Regiao regiao;
 	
-	public User() {
+	public Funcionario() {
 		
 	}
 
-	public User(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro, int hierarquia, int aprovado) {
+	public Funcionario(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro, int hierarquia, int aprovado, Funcionario func) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,16 +72,17 @@ public class User implements Serializable {
 		this.dataCadastro = dataCadastro;
 		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
+		this.func = func;
 	}
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nome=" + nome + ", email=" + email + ", celular=" + celular + ", senha=" + senha
+		return "Funcionario [id=" + id + ", nome=" + nome + ", email=" + email + ", celular=" + celular + ", senha=" + senha
 				+ ", senhaConfirm=" + senhaConfirm + ", descricao=" + descricao + ", cpf=" + cpf + ", hierarquia="
 				+ hierarquia + ", aprovado=" + aprovado + "]";
 	}
 
-	public User(Long id, String nome, String email, String celular, String senha,
+	public Funcionario(Long id, String nome, String email, String celular, String senha,
 			String senhaConfirm, String descricao, Long cpf, int hierarquia, int aprovado) {
 		super();
 		this.id = id;
@@ -84,7 +93,6 @@ public class User implements Serializable {
 		this.senhaConfirm = senhaConfirm;
 		this.descricao = descricao;
 		this.cpf = cpf;
-		
 		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
 	}
@@ -198,6 +206,10 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
+	public List<Skills> getSkillss() {
+		return skills;
+	}
+
 	public Regiao getRegiao() {
 		return regiao;
 	}
@@ -206,9 +218,14 @@ public class User implements Serializable {
 		this.regiao = regiao;
 	}
 
-	public List<Skills> getSkillss() {
-		return skills;
+	public Funcionario getFunc() {
+		return func;
 	}
+
+	public void setFunc(Funcionario func) {
+		this.func = func;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -225,7 +242,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Funcionario other = (Funcionario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

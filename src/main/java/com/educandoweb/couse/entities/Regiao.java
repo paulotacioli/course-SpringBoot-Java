@@ -23,17 +23,17 @@ public class Regiao implements Serializable {
 	
 	@OneToOne
 	@MapsId
-	private User user;
+	private Funcionario funcionario;
 	
 	public Regiao() {
 	}
 
-	public Regiao(Long id, String estado, String cidade, User user) {
+	public Regiao(Long id, String estado, String cidade, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.estado = estado;
 		this.cidade = cidade;
-		this.user = user;
+		this.funcionario = funcionario;
 	}
 
 	public Long getId() {
@@ -60,12 +60,12 @@ public class Regiao implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public User getUser() {
-		return user;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override
