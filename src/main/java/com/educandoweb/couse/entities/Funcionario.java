@@ -12,12 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -34,30 +31,33 @@ public class Funcionario implements Serializable {
 	private String senha;
 	private String senhaConfirm;
 	private String descricao;
-	private Long cpf;
+	private String cpf;
 	private Instant dataNascimento;
 	private Instant dataIntegracao;
 	private Instant dataCadastro;
 	private int hierarquia;
 	private int aprovado;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "funcionario")
 	private List<Skills> skills = new ArrayList<>();
 	
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "func_id")
-	private Funcionario func;
+	@JoinColumn(name = "funcao_id")
+	private Funcao func;
+	
 	
 	@OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private Regiao regiao;
+
 	
 	public Funcionario() {
-		
 	}
-
-	public Funcionario(Long id, String nome, String email, String celular, String senha, String senhaConfirm, String descricao, Long cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro, int hierarquia, int aprovado, Funcionario func) {
+	
+	
+	
+	public Funcionario( String nome, String email, String celular, String senha,
+			String senhaConfirm, String descricao, String cpf, int hierarquia, int aprovado, Funcao func) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -67,9 +67,6 @@ public class Funcionario implements Serializable {
 		this.senhaConfirm = senhaConfirm;
 		this.descricao = descricao;
 		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.dataIntegracao = dataIntegracao;
-		this.dataCadastro = dataCadastro;
 		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
 		this.func = func;
@@ -82,22 +79,9 @@ public class Funcionario implements Serializable {
 				+ hierarquia + ", aprovado=" + aprovado + "]";
 	}
 
-	public Funcionario(Long id, String nome, String email, String celular, String senha,
-			String senhaConfirm, String descricao, Long cpf, int hierarquia, int aprovado) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.celular = celular;
-		this.senha = senha;
-		this.senhaConfirm = senhaConfirm;
-		this.descricao = descricao;
-		this.cpf = cpf;
-		this.hierarquia = hierarquia;
-		this.aprovado = aprovado;
-	}
-
 	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -154,11 +138,11 @@ public class Funcionario implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -217,15 +201,15 @@ public class Funcionario implements Serializable {
 	public void setRegiao(Regiao regiao) {
 		this.regiao = regiao;
 	}
-
-	public Funcionario getFunc() {
+	
+	public Funcao getFunc() {
 		return func;
 	}
 
-	public void setFunc(Funcionario func) {
+	public void setFunc(Funcao func) {
 		this.func = func;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

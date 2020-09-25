@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.educandoweb.couse.entities.Funcao;
-import com.educandoweb.couse.services.FuncaoService;
+import com.educandoweb.couse.entities.Regiao;
+import com.educandoweb.couse.services.RegiaoService;
 
 @RestController
-@RequestMapping(value = "/funcoes")
-public class FuncaoResouce {
+@RequestMapping(value = "/regioes")
+public class RegiaoResouce {
 
 	@Autowired
-	private FuncaoService service;
+	private RegiaoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Funcao>> findAll(){
-		List<Funcao> list = service.findAll();
+	public ResponseEntity<List<Regiao>> findAll(){
+		List<Regiao> list = service.findAll();
 		System.out.println(list.get(0).toString());
 		System.out.println("ResponseEntity.ok().body(list);"+ResponseEntity.ok().body(list));
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Funcao> findById(@PathVariable Long id){
-		Funcao obj = service.findById(id);
+	public ResponseEntity<Regiao> findById(@PathVariable Long id){
+		Regiao obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

@@ -13,6 +13,7 @@ import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.FuncaoRepository;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
+import com.educandoweb.couse.repositores.RegiaoRepository;
 import com.educandoweb.couse.repositores.SkillsRepository;
 
 @Configuration
@@ -23,44 +24,43 @@ public class TestConfig implements CommandLineRunner{
 	private FuncionarioRepository funcionarioRepository;
 
 	@Autowired
-	private SkillsRepository orderRepository;
+	private SkillsRepository skillsRepository;
 	
 	@Autowired
 	private FuncaoRepository funcaoRepository;
+	
+	@Autowired
+	private RegiaoRepository regiaoRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		
 		
+		Funcao func1 = new Funcao( "Presidente");
+		Funcao func2 = new Funcao("Analista");
+		Funcao func3 = new Funcao("Marketing digital");
+		Funcao func4 = new Funcao("Programador");
+		Funcao func5 = new Funcao("Scrum");
+		funcaoRepository.saveAll(Arrays.asList(func1, func2, func3, func4, func5));
 		
 		
-		Funcionario f1 = new Funcionario(null, "Maria Brown", "maria@gmail.com", "988888888", "123456", "123456", "descricao", Long.parseLong("111111"), 0,0);
-		Funcionario f2 = new Funcionario(null,"Paulo Tacioli", "Paulo@gmail.com", "111111", "123", "123", "descricao", Long.parseLong("222222"), 0, 0);
-		
-		Funcao p1 = new Funcao("The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
-		Funcao p2 = new Funcao("Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
-		Funcao p3 = new Funcao("Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
-		Funcao p4 = new Funcao("PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
-		Funcao p5 = new Funcao("Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
-
-		
-		funcaoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		Funcionario f1 = new Funcionario( "Maria Clara", "Mariaclara@gmail.com", "111111", "1234", "1234", "Descrição Maria", "cpfMaria", 0, 0, func1);
+		Funcionario f2 = new Funcionario("Paulo Tacioli", "Paulo@gmail.com", "111111", "123", "123", "descricao Paulo", "CpfPaulo", 0, 0, func3);
 		
 
-		funcaoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
-
-		Skills o1 = new Skills(null, "habilidade", f1);
-		Skills o2 = new Skills(null, "habilidade", f2);
-		Skills o3 = new Skills(null, "habilidade", f1);
-		
+//		
+//		Skills o1 = new Skills("habilidade", f1);
+//		Skills o2 = new Skills("habilidade", f2);
+//		Skills o3 = new Skills("habilidade", f1);
+//		
+//		skillsRepository.saveAll(Arrays.asList(o1, o2, o3));
+//		
+//		
+//		Regiao r1 = new Regiao(null, "São Paulo", "São José dos Campos", f2);
+//		Regiao r2 = new Regiao(null, "São Paulo", "São José dos Campos", f1);
+//		
+//		regiaoRepository.saveAll(Arrays.asList(r1, r2));
 		funcionarioRepository.saveAll(Arrays.asList(f1, f2));
-		
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
-		
-		Regiao saoPaulo = new Regiao(null, "Sao Paulo", "São josé dos Campos", f1);
-		f1.setRegiao(saoPaulo); 
-		
-		funcionarioRepository.save(f1);
 		
 	}
 

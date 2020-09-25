@@ -21,29 +21,23 @@ public class Funcao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String description;
-	private Double price;
-	private String imgUrl;
+	private String funcao;
 	
-	
-	
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "func")
-	private List<Funcionario> funcionario = new ArrayList<>();
+	private List<Funcionario> funcionarios = new ArrayList<>();
 	
+	public Funcao(String string) {
+		this.funcao=string;
+	}
+
+
+
 	public Funcao() {
-
+		
 	}
 
-	public Funcao( String name, String description, Double price, String imgUrl) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.imgUrl = imgUrl;
-	}
+
 
 	public Long getId() {
 		return id;
@@ -53,36 +47,16 @@ public class Funcao implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFuncao() {
+		return funcao;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
 	@Override
@@ -109,5 +83,7 @@ public class Funcao implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

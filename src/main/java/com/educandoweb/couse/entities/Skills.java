@@ -32,9 +32,8 @@ public class Skills implements Serializable {
 	public Skills() {
 	}
 
-	public Skills(Long id, String skill, Funcionario funcionario) {
+	public Skills( String skill, Funcionario funcionario) {
 		super();
-		this.id = id;
 		this.skill= skill;
 		this.funcionario = funcionario;
 	}
