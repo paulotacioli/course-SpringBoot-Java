@@ -1,13 +1,14 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,21 +24,22 @@ public class Skills implements Serializable {
 
 	private String skill;
 
-
 	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "funcionario_id")
-	private Funcionario funcionario;
+	@ManyToMany(mappedBy = "skill")	
+	private Set<Funcionario> funcionario = new HashSet<>();
+	
+	
 
-	public Skills() {
+
+
+	public Set<Funcionario> getFuncionario() {
+		return funcionario;
 	}
 
-	public Skills( String skill, Funcionario funcionario) {
-		super();
-		this.skill= skill;
+	public void setFuncionario(Set<Funcionario> funcionario) {
 		this.funcionario = funcionario;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,14 +79,6 @@ public class Skills implements Serializable {
 
 	public void setSkill(String skill) {
 		this.skill = skill;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
 	}
 
 	public static long getSerialversionuid() {

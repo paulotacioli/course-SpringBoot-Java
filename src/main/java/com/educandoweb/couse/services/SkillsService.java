@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.SkillsRepository;
 
@@ -23,5 +24,9 @@ public class SkillsService {
 	public Skills findById(Long id) {
 		Optional<Skills> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	public Skills insert(Skills obj) {
+		return repository.save(obj);
 	}
 }
