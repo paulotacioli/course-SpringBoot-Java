@@ -2,12 +2,15 @@ package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,19 +26,22 @@ public class Funcao implements Serializable {
 	private Long id;
 	private String funcao;
 	
-	@JsonIgnore
+	
+	
 	@OneToMany(mappedBy = "funcao")
 	private List<Funcionario> funcionarios = new ArrayList<>();
+
 	
-	public Funcao(String string) {
-		this.funcao=string;
-	}
-
-
-
 	public Funcao() {
-		
 	}
+	
+
+	public Funcao(String funcao) {
+		super();
+		this.funcao = funcao;
+	}
+
+
 
 
 
@@ -55,6 +61,12 @@ public class Funcao implements Serializable {
 		this.funcao = funcao;
 	}
 	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}

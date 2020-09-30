@@ -3,10 +3,8 @@ package com.educandoweb.couse.entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -39,6 +36,8 @@ public class Funcionario implements Serializable {
 	private Instant dataCadastro;
 	private int hierarquia;
 	private int aprovado;
+	private int coordenador;
+	
 	
 	
     @ManyToMany
@@ -52,11 +51,12 @@ public class Funcionario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "funcao_id")
 	private Funcao funcao;
+    
 	
-	
-	@OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "regiao_id")
 	private Regiao regiao;
-
+	
 	
 	public Funcionario() {
 	}
@@ -64,7 +64,7 @@ public class Funcionario implements Serializable {
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
 			String descricao, String cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro,
-			int hierarquia, int aprovado, Set<Skills> skill, Funcao funcao, Regiao regiao) {
+			int hierarquia, int aprovado, int coordenador, Set<Skills> skill, Funcao funcao, Regiao regiao) {
 		super();
 	
 		this.nome = nome;
@@ -79,9 +79,11 @@ public class Funcionario implements Serializable {
 		this.dataCadastro = dataCadastro;
 		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
+		this.coordenador = coordenador;
 		this.skill = skill;
 		this.funcao = funcao;
 		this.regiao = regiao;
+
 	}
 
 
@@ -227,6 +229,16 @@ public class Funcionario implements Serializable {
 
 	public void setAprovado(int aprovado) {
 		this.aprovado = aprovado;
+	}
+
+
+	public int getCoordenador() {
+		return coordenador;
+	}
+
+
+	public void setCoordenador(int coordenador) {
+		this.coordenador = coordenador;
 	}
 
 

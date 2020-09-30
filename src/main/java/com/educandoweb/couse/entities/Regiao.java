@@ -1,17 +1,15 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_regiao")
@@ -24,20 +22,19 @@ public class Regiao implements Serializable {
 	private String estado;
 	private String cidade;
 	
-	@JsonIgnore
-	@OneToOne(cascade=CascadeType.PERSIST)
-	@MapsId
-	private Funcionario funcionario;
+	
+	@OneToMany(mappedBy = "regiao")
+	private List<Funcionario> funcionarios = new ArrayList<>();
+	
+
 	
 	public Regiao() {
 	}
 
-	public Regiao(Long id, String estado, String cidade, Funcionario funcionario) {
+	public Regiao(String estado, String cidade) {
 		super();
-		this.id = id;
 		this.estado = estado;
 		this.cidade = cidade;
-		this.funcionario = funcionario;
 	}
 
 	public Long getId() {
@@ -64,12 +61,12 @@ public class Regiao implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
 	@Override

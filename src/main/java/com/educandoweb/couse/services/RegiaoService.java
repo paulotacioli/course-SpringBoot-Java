@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Regiao;
+import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.RegiaoRepository;
 
 @Service
@@ -23,5 +24,9 @@ public class RegiaoService {
 	public Regiao findById(Long id) {
 		Optional<Regiao> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	public Regiao insert(Regiao obj) {
+		return repository.save(obj);
 	}
 }

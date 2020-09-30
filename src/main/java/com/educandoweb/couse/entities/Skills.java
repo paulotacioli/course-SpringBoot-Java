@@ -27,11 +27,8 @@ public class Skills implements Serializable {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "skill")	
 	private Set<Funcionario> funcionario = new HashSet<>();
+
 	
-	
-
-
-
 	public Set<Funcionario> getFuncionario() {
 		return funcionario;
 	}

@@ -24,4 +24,12 @@ public class FuncaoService {
 		Optional<Funcao> obj = repository.findById(id);
 		return obj.get();
 	}
+
+	public Funcao insert(Funcao obj) {
+		return repository.save(obj);
+	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }

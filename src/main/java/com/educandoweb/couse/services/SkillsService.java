@@ -29,4 +29,8 @@ public class SkillsService {
 	public Skills insert(Skills obj) {
 		return repository.save(obj);
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
