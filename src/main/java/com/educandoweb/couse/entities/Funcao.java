@@ -27,7 +27,7 @@ public class Funcao implements Serializable {
 	private String funcao;
 	
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "funcao")
 	private List<Funcionario> funcionarios = new ArrayList<>();
 

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_regiao")
 public class Regiao implements Serializable {
@@ -22,11 +24,9 @@ public class Regiao implements Serializable {
 	private String estado;
 	private String cidade;
 	
-	
-	@OneToMany(mappedBy = "regiao")
-	private List<Funcionario> funcionarios = new ArrayList<>();
-	
-
+	@OneToMany (mappedBy = "regiao")
+	@JsonIgnore
+	private List<Funcionario> funcionario = new ArrayList<>();
 	
 	public Regiao() {
 	}
@@ -65,9 +65,12 @@ public class Regiao implements Serializable {
 		return serialVersionUID;
 	}
 
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
+	
+	public List<Funcionario> getFuncionario() {
+		return funcionario;
 	}
+
+
 
 	@Override
 	public int hashCode() {

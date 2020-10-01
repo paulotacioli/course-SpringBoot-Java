@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Regiao;
-import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.RegiaoRepository;
 
 @Service

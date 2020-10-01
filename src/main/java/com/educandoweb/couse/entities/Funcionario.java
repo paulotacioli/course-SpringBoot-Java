@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tb_funcionario")
 public class Funcionario implements Serializable {
@@ -24,18 +24,31 @@ public class Funcionario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nome;
+	
 	private String email;
+	
 	private String celular;
-	private String senha;
+	
+	private String senha;	
+	
 	private String senhaConfirm;
+	
 	private String descricao;
+	
 	private String cpf;
+	@NotNull
 	private Instant dataNascimento;
+	@NotNull
 	private Instant dataIntegracao;
+	@NotNull
 	private Instant dataCadastro;
+	@NotNull
 	private int hierarquia;
+	@NotNull
 	private int aprovado;
+	@NotNull
 	private int coordenador;
 	
 	

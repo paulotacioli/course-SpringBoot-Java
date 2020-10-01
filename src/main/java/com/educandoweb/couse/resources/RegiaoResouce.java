@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Regiao;
-import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.services.RegiaoService;
 
 @RestController
