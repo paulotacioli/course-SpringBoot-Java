@@ -26,8 +26,6 @@ public class FuncionarioResouce {
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> findAll(){
 		List<Funcionario> list = service.findAll();
-		System.out.println(list.get(0).toString());
-		System.out.println("ResponseEntity.ok().body(list);"+ResponseEntity.ok().body(list));
 		return ResponseEntity.ok().body(list);
 	}
 	

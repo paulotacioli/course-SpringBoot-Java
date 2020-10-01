@@ -27,8 +27,6 @@ public class FuncaoResouce {
 	@GetMapping
 	public ResponseEntity<List<Funcao>> findAll(){
 		List<Funcao> list = service.findAll();
-		System.out.println(list.get(0).toString());
-		System.out.println("ResponseEntity.ok().body(list);"+ResponseEntity.ok().body(list));
 		return ResponseEntity.ok().body(list);
 	}
 	

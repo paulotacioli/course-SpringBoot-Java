@@ -28,8 +28,6 @@ public class SkillsResouce {
 	@GetMapping
 	public ResponseEntity<List<Skills>> findAll(){
 		List<Skills> list = service.findAll();
-		System.out.println(list.get(0).toString());
-		System.out.println("ResponseEntity.ok().body(list);"+ResponseEntity.ok().body(list));
 		return ResponseEntity.ok().body(list);
 	}
 	
