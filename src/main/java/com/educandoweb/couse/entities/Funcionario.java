@@ -2,9 +2,10 @@ package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -15,8 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tb_funcionario")
@@ -74,6 +77,11 @@ public class Funcionario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "regiao_id")
 	private Regiao regiao;
+	
+	
+	@OneToMany (mappedBy = "funcionario")
+	@JsonIgnore
+	private List<Pendencia> pendencias = new ArrayList<>();
 	
 	
 	public Funcionario() {
@@ -290,13 +298,12 @@ public class Funcionario implements Serializable {
 	}
 
 
+	public List<Pendencia> getPendencias() {
+		return pendencias;
+	}
+
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-
-	
-	
 }
