@@ -1,7 +1,9 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,11 +41,14 @@ public class Funcionario implements Serializable {
 	
 	private String cpf;
 	@NotNull
-	private Instant dataNascimento;
+	private String dataNascimento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
 	@NotNull
-	private Instant dataIntegracao;
+	private String dataIntegracao = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
 	@NotNull
-	private Instant dataCadastro;
+	private String dataCadastro = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+
 	@NotNull
 	private int hierarquia;
 	@NotNull
@@ -76,8 +81,8 @@ public class Funcionario implements Serializable {
 
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, String cpf, Instant dataNascimento, Instant dataIntegracao, Instant dataCadastro,
-			int hierarquia, int aprovado, int coordenador, Set<Skills> skill, Funcao funcao, Regiao regiao) {
+			String descricao, String cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
+			Funcao funcao, Regiao regiao) {
 		super();
 	
 		this.nome = nome;
@@ -87,9 +92,6 @@ public class Funcionario implements Serializable {
 		this.senhaConfirm = senhaConfirm;
 		this.descricao = descricao;
 		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.dataIntegracao = dataIntegracao;
-		this.dataCadastro = dataCadastro;
 		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
 		this.coordenador = coordenador;
@@ -195,32 +197,35 @@ public class Funcionario implements Serializable {
 	}
 
 
-	public Instant getDataNascimento() {
+	
+
+
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
 
-	public void setDataNascimento(Instant dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
 
-	public Instant getDataIntegracao() {
+	public String getDataIntegracao() {
 		return dataIntegracao;
 	}
 
 
-	public void setDataIntegracao(Instant dataIntegracao) {
+	public void setDataIntegracao(String dataIntegracao) {
 		this.dataIntegracao = dataIntegracao;
 	}
 
 
-	public Instant getDataCadastro() {
+	public String getDataCadastro() {
 		return dataCadastro;
 	}
 
 
-	public void setDataCadastro(Instant dataCadastro) {
+	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
