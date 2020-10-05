@@ -84,13 +84,17 @@ public class Funcionario implements Serializable {
 	private List<Pendencia> pendencias = new ArrayList<>();
 	
 	
+	@ManyToOne
+	@JoinColumn(name = "comite_id")
+	private Comite comite;
+	
 	public Funcionario() {
 	}
 
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
 			String descricao, String cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
-			Funcao funcao, Regiao regiao) {
+			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
 		this.nome = nome;
@@ -106,6 +110,7 @@ public class Funcionario implements Serializable {
 		this.skill = skill;
 		this.funcao = funcao;
 		this.regiao = regiao;
+		this.comite = comite;
 
 	}
 
@@ -300,6 +305,16 @@ public class Funcionario implements Serializable {
 
 	public List<Pendencia> getPendencias() {
 		return pendencias;
+	}
+
+
+	public Comite getComite() {
+		return comite;
+	}
+
+
+	public void setComite(Comite comite) {
+		this.comite = comite;
 	}
 
 
