@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,19 +31,30 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private String nome;
 	
+	@Column(unique = true)
+	@NotNull
 	private String email;
 	
+	@NotNull
 	private String celular;
 	
+	@NotNull
 	private String senha;	
 	
+	@NotNull
 	private String senhaConfirm;
 	
+	@Column(length = 5000)
+	@NotNull
 	private String descricao;
 	
+	@Column(unique = true)
+	@NotNull
 	private String cpf;
+	
 	@NotNull
 	private String dataNascimento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
@@ -54,8 +66,10 @@ public class Funcionario implements Serializable {
 
 	@NotNull
 	private int hierarquia;
+	
 	@NotNull
 	private int aprovado;
+	
 	@NotNull
 	private int coordenador;
 	
@@ -90,7 +104,7 @@ public class Funcionario implements Serializable {
 	
 	public Funcionario() {
 	}
-
+	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
 			String descricao, String cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 

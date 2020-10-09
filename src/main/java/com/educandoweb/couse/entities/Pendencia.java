@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +24,16 @@ public class Pendencia implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private String titulo;
+	
+	@Column(length = 5000)
+	@NotNull
 	private String descricao;
+	
 	@NotNull
 	private String dataCriacao = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+	
 	@NotNull
 	private String dataLimite = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	
