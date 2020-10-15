@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
 
@@ -24,17 +25,17 @@ public class Pendencia implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotEmpty
 	private String titulo;
 	
 	@Column(length = 5000)
-	@NotNull
+	@NotEmpty
 	private String descricao;
 	
-	@NotNull
+	@NotEmpty
 	private String dataCriacao = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 	
-	@NotNull
+	@NotEmpty
 	private String dataLimite = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	
 	

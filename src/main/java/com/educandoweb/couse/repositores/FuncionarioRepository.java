@@ -6,4 +6,7 @@ import com.educandoweb.couse.entities.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
+	boolean existsById(Long cpf);
+
+
 }

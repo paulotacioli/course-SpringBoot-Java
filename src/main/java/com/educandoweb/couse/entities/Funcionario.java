@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,50 +19,50 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tb_funcionario")
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
+		
+	@NotEmpty
 	private String nome;
 	
 	@Column(unique = true)
-	@NotNull
+	@NotEmpty
 	private String email;
 	
-	@NotNull
+	@NotEmpty
 	private String celular;
 	
-	@NotNull
+	@NotEmpty
 	private String senha;	
 	
-	@NotNull
+	@NotEmpty
 	private String senhaConfirm;
 	
 	@Column(length = 5000)
-	@NotNull
+	@NotEmpty
 	private String descricao;
 	
+	@Id
 	@Column(unique = true)
 	@NotNull
-	private String cpf;
+	private Long cpf;
 	
-	@NotNull
+	@NotEmpty
 	private String dataNascimento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
-	@NotNull
+	@NotEmpty
 	private String dataIntegracao = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
-	@NotNull
+	@NotEmpty
 	private String dataCadastro = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 
 	@NotNull
@@ -102,12 +103,18 @@ public class Funcionario implements Serializable {
 	@JoinColumn(name = "comite_id")
 	private Comite comite;
 	
+	
+	@OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Login login;
+	
+	
 	public Funcionario() {
 	}
 	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, String cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
+			String descricao, Long cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
 			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
@@ -129,13 +136,8 @@ public class Funcionario implements Serializable {
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-
-
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-		String descricao, String cpf, int hierarquia, int aprovado) {
+		String descricao, Long cpf, int hierarquia, int aprovado) {
 	super();
 	this.nome = nome;
 	this.email = email;
@@ -148,10 +150,6 @@ public class Funcionario implements Serializable {
 	this.aprovado = aprovado;
 
 }
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 
 	public String getNome() {
@@ -213,18 +211,14 @@ public class Funcionario implements Serializable {
 		this.descricao = descricao;
 	}
 
-
-	public String getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(String cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-
-
-	
 
 
 	public String getDataNascimento() {
@@ -335,4 +329,15 @@ public class Funcionario implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	public Login getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+	
 }

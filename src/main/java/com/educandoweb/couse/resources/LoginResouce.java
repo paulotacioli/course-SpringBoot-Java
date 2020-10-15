@@ -13,33 +13,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.educandoweb.couse.entities.Funcionario;
-import com.educandoweb.couse.services.FuncionarioService;
+import com.educandoweb.couse.entities.Login;
+import com.educandoweb.couse.services.LoginService;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/funcionarios")
-public class FuncionarioResouce {
+@RequestMapping(value = "/login")
+public class LoginResouce {
 
 	@Autowired
-	private FuncionarioService service;
+	private LoginService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Funcionario>> findAll(){
-		List<Funcionario> list = service.findAll();
+	public ResponseEntity<List<Login>> findAll(){
+		List<Login> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Funcionario> findById(@PathVariable Long id){
-		Funcionario obj = service.findById(id);
+	public ResponseEntity<Login> findById(@PathVariable Long id){
+		Login obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Funcionario> insert(@RequestBody Funcionario obj){
+	public ResponseEntity<Login> insert(@RequestBody Login obj){
 		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getCpf()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
