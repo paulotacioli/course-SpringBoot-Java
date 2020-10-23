@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
@@ -98,6 +99,14 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(SenhasDiferentesException.class)
 	public ResponseEntity<StandardError> SenhasDiferentesException(SenhasDiferentesException e, HttpServletRequest request){
 		String error = "Atencao! As senhas estao diferentes.";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(CampoJaExisteException.class)
+	public ResponseEntity<StandardError> CampoJaExisteException(CampoJaExisteException e, HttpServletRequest request){
+		String error = "Campo ja existente.";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
 		return ResponseEntity.status(status).body(err);

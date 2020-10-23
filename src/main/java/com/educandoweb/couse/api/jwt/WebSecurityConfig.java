@@ -75,10 +75,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 // dont authenticate this particular request
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/comites", "/funcionarios", "/authenticate", 
-						"/pendencias", "/regioes", "/funcoes")
+						"/pendencias", "/regioes", "/funcoes", "/skills")
 				.permitAll()
-				.antMatchers(HttpMethod.POST, "/skills")
-				.hasAuthority("ROLE_ADMINISTRADOR")
+//				.antMatchers(HttpMethod.POST, "/skills")
+//				.hasAuthority("ROLE_ADMINISTRADOR")
 				.and()
 //				.antMatchers(HttpMethod.GET, "/comites", "/funcionarios", "/authenticate", 
 //						"/pendencias", "/regioes", "/skills", "/funcoes")

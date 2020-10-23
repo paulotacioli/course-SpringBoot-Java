@@ -11,13 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "tb_regiao")
+@Table(name = "tb_regiao", uniqueConstraints=
+@UniqueConstraint(columnNames={"cidade", "estado"}))
 public class Regiao implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -21,12 +21,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name = "tb_funcionario")
+@Table(name = "tb_funcionario", uniqueConstraints=
+@UniqueConstraint(columnNames={"email"}))
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
