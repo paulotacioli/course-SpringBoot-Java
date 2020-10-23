@@ -22,9 +22,9 @@ public class ApisApplication extends SpringBootServletInitializer {
 //		
 //		
 //	}
-	public static void main(String[] args) {
-		SpringApplication.run(ApisApplication.class, args);
-	}
-	
+//	public static void main(String[] args) {
+//		SpringApplication.run(ApisApplication.class, args);
+//	}
+//	
 
 }

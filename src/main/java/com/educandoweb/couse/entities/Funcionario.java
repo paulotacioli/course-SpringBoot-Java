@@ -34,7 +34,6 @@ public class Funcionario implements Serializable {
 	@NotEmpty
 	private String nome;
 	
-	@Column(unique = true)
 	@NotEmpty
 	private String email;
 	
@@ -52,7 +51,6 @@ public class Funcionario implements Serializable {
 	private String descricao;
 	
 	@Id
-	@Column(unique = true)
 	@NotNull
 	private Long cpf;
 	
