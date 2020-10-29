@@ -1,16 +1,10 @@
 package com.educandoweb.couse.config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.educandoweb.couse.entities.Funcao;
-import com.educandoweb.couse.entities.Funcionario;
-import com.educandoweb.couse.entities.Regiao;
-import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.FuncaoRepository;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.RegiaoRepository;

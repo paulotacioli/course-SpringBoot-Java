@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -33,6 +34,10 @@ public class Comite implements Serializable {
 	@JsonIgnore
 	private List<Funcionario> funcionario = new ArrayList<>();
 
+	@JsonIgnore
+	@OneToOne (mappedBy = "comite")
+	private Hierarquia hierarquia;
+	
 	
 	public Comite() {
 	}

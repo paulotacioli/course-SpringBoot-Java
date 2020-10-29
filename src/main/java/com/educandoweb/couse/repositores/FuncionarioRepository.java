@@ -8,5 +8,10 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
 	boolean existsById(Long cpf);
 
+	static Funcionario findById(Funcionario funcionario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

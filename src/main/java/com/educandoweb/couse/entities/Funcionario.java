@@ -11,8 +11,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -64,9 +62,6 @@ public class Funcionario implements Serializable {
 
 	@NotEmpty
 	private String dataCadastro = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
-
-	@NotNull
-	private int hierarquia;
 	
 	@NotNull
 	private int aprovado;
@@ -109,12 +104,17 @@ public class Funcionario implements Serializable {
 	private Login login;
 	
 	
+	@JsonIgnore
+	@OneToOne (mappedBy = "funcionario")
+	private Hierarquia hierarquia;
+	
+	
 	public Funcionario() {
 	}
 	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, Long cpf, int hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
+			String descricao, Long cpf, Hierarquia hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
 			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
@@ -137,7 +137,7 @@ public class Funcionario implements Serializable {
 
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-		String descricao, Long cpf, int hierarquia, int aprovado) {
+		String descricao, Long cpf, Hierarquia hierarquia, int aprovado) {
 	super();
 	this.nome = nome;
 	this.email = email;
@@ -251,16 +251,6 @@ public class Funcionario implements Serializable {
 	}
 
 
-	public int getHierarquia() {
-		return hierarquia;
-	}
-
-
-	public void setHierarquia(int hierarquia) {
-		this.hierarquia = hierarquia;
-	}
-
-
 	public int getAprovado() {
 		return aprovado;
 	}
@@ -339,5 +329,16 @@ public class Funcionario implements Serializable {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
+
+
+	public Hierarquia getHierarquia() {
+		return hierarquia;
+	}
+
+
+	public void setHierarquia(Hierarquia hierarquia) {
+		this.hierarquia = hierarquia;
+	}
+
 	
 }
