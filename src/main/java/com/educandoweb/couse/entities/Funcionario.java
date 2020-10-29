@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_funcionario", uniqueConstraints=
-@UniqueConstraint(columnNames={"email"}))
+@UniqueConstraint(columnNames={"cpf"}))
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -65,7 +65,7 @@ public class FuncionarioService {
 					obj.setAprovado(8);
 					System.out.println("FUNCIONARIO 9999999999999999999999");
 
-
+					
 					loginService.saveLoginFuncionario(objEcp);
 					System.out.println("FUNCIONARIO 77777777777777777777777777");
 
@@ -88,12 +88,15 @@ public class FuncionarioService {
 
 						e.printStackTrace();
 						throw new ViolationException (obj, e.getMostSpecificCause().toString());
-					} 
+					} catch (RuntimeException e) {
+						e.printStackTrace();
+					}
 					} else {
 						
 						throw new ValidacaoTamanhoSenhaException ("A senha deve conter no mÃ­nimo 6 caracteres!");
-					}
-					}
+					} 
+			}
+					
 		} else {
 			throw new SenhasDiferentesException ("Senhas no cadastro de corretores nÃ£o estÃ£o iguais.");
 		}
