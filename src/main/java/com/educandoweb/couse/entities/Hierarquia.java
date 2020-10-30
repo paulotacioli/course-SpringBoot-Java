@@ -3,6 +3,8 @@ package com.educandoweb.couse.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -16,26 +18,23 @@ public class Hierarquia implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotNull
-	private Long relacionamento;
-	
-	@OneToOne
-	@JoinColumn(name = "funcionario_cpf")
-	private Funcionario funcionario;
+	private char relacionamento;
 	
 	
-	@OneToOne
-	@JoinColumn(name = "comite_id")
-	private Comite comite;
+	private Long funcionario;
+	
+	
+	private Long comite;
 	
 	
 	public Hierarquia() {
 	}
 
 
-	public Hierarquia(@NotNull Long relacionamento, Funcionario funcionario, Comite comite) {
+	public Hierarquia( char relacionamento, Long funcionario, Long comite) {
 		super();
 		this.relacionamento = relacionamento;
 		this.funcionario = funcionario;
@@ -47,34 +46,28 @@ public class Hierarquia implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
-	public Funcionario getFuncionario() {
+	
+	public Long getFuncionario() {
 		return funcionario;
 	}
 
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Long funcionario) {
 		this.funcionario = funcionario;
 	}
 
 
-	public Long getRelacionamento() {
+	public char getRelacionamento() {
 		return relacionamento;
 	}
 
 
-	public void setRelacionamento(Long relacionamento) {
-		this.relacionamento = relacionamento;
-	}
-
-
-	public Comite getComite() {
+	public Long getComite() {
 		return comite;
 	}
 
 
-	public void setComite(Comite comite) {
+	public void setComite(Long comite) {
 		this.comite = comite;
 	}
 
@@ -87,6 +80,10 @@ public class Hierarquia implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+
+	public void setRelacionamento(char c) {
+		
+	}
 	
 }

@@ -34,10 +34,6 @@ public class Comite implements Serializable {
 	@JsonIgnore
 	private List<Funcionario> funcionario = new ArrayList<>();
 
-	@JsonIgnore
-	@OneToOne (mappedBy = "comite")
-	private Hierarquia hierarquia;
-	
 	
 	public Comite() {
 	}

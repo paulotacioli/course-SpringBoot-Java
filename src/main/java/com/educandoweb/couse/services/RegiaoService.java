@@ -55,4 +55,9 @@ public class RegiaoService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
+	
+	public List<Regiao> findById(String estado) {
+		List<Regiao> obj = repository.findAllByEstado(estado);
+		return obj;
+	}
 }

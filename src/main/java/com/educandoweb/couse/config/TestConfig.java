@@ -1,10 +1,13 @@
 package com.educandoweb.couse.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.repositores.FuncaoRepository;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.RegiaoRepository;
@@ -49,8 +52,8 @@ public class TestConfig implements CommandLineRunner{
 //		
 //		skillsRepository.saveAll(Arrays.asList(o1, o2, o3));
 //				
-//		Regiao r1 = new Regiao(null, "São Paulo", "São José dos Campos", f2);
-//		Regiao r2 = new Regiao(null, "São Paulo", "São José dos Campos", f1);
+//		Regiao r1 = new Regiao("São Paulo", "São José dos Campos");
+//		Regiao r2 = new Regiao("São Paulo", "São José dos Campos");
 //	
 //		regiaoRepository.saveAll(Arrays.asList(r1, r2));
 //		funcionarioRepository.saveAll(Arrays.asList(f1, f2));

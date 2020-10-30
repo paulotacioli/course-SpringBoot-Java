@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.Hierarquia;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
+import com.educandoweb.couse.repositores.HierarquiaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
@@ -27,6 +29,10 @@ public class FuncionarioService {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private HierarquiaRepository hierarquiaRepository;
+
 
 	public List<Funcionario> findAll(){
 		return repository.findAll();	
@@ -68,7 +74,15 @@ public class FuncionarioService {
 					
 					loginService.saveLoginFuncionario(objEcp);
 					System.out.println("FUNCIONARIO 77777777777777777777777777");
-
+					
+					
+					Hierarquia objHierarquia = new Hierarquia();
+					objHierarquia.setComite(obj.getComite().getId());
+					objHierarquia.setFuncionario(obj.getCpf());
+					objHierarquia.setRelacionamento('c');
+					hierarquiaRepository.save(objHierarquia);
+					System.out.println("FUNCIONARIO 999999999999999999999");
+					
 					repository.save(objEcp);
 					System.out.println("FUNCIONARIO 888888888888888888888888");
 

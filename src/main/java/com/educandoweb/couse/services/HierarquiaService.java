@@ -57,17 +57,16 @@ public class HierarquiaService {
 		}
 	}
 
-	public String encontrarChefe(Long cpf){
-
-		Hierarquia obj = new  Hierarquia();
-		obj = HierarquiaRepository.findByFuncionarioAndRelacionamento(cpf,'s');
-		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
-		Hierarquia objNovo = new Hierarquia();
-		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
-		System.out.println("imprmir o cpf do funcionario"+ objNovo.getFuncionario());
-		Funcionario objFunc = new Funcionario();
-		objFunc = FuncionarioRepository.findById(objNovo.getFuncionario());
-		return objFunc.getNome();
-
-	}
+//	public String encontrarChefe(Long cpf){
+//
+//		Hierarquia obj = new  Hierarquia();
+//		obj = HierarquiaRepository.findByFuncionarioAndRelacionamento(cpf,'s');
+//		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
+//		Hierarquia objNovo = new Hierarquia();
+//		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
+//		System.out.println("imprmir o cpf do funcionario"+ objNovo.getFuncionario());
+//		Optional<Funcionario> objFunc = Optional.of(new Funcionario());
+//		objFunc = FuncionarioRepository.findById(objNovo.getFuncionario());
+//		return objFunc;
+//	}
 }

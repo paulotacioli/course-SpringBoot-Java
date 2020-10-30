@@ -11,7 +11,7 @@ public interface HierarquiaRepository extends JpaRepository<Hierarquia, Long>{
 		return null;
 	}
 
-	static Hierarquia findByComiteAndRelacionamento(Comite comite, char c) {
+	static Hierarquia findByComiteAndRelacionamento(Long comite, char c) {
 		return null;
 	}
 }

@@ -66,6 +66,8 @@ public class Funcionario implements Serializable {
 	@NotNull
 	private int aprovado;
 	
+	
+	
 	@NotNull
 	private int coordenador;
 	
@@ -104,17 +106,13 @@ public class Funcionario implements Serializable {
 	private Login login;
 	
 	
-	@JsonIgnore
-	@OneToOne (mappedBy = "funcionario")
-	private Hierarquia hierarquia;
-	
 	
 	public Funcionario() {
 	}
 	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, Long cpf, Hierarquia hierarquia, int aprovado, int coordenador, Set<Skills> skill, 
+			String descricao, Long cpf, int aprovado, int coordenador, Set<Skills> skill, 
 			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
@@ -125,7 +123,6 @@ public class Funcionario implements Serializable {
 		this.senhaConfirm = senhaConfirm;
 		this.descricao = descricao;
 		this.cpf = cpf;
-		this.hierarquia = hierarquia;
 		this.aprovado = aprovado;
 		this.coordenador = coordenador;
 		this.skill = skill;
@@ -137,7 +134,7 @@ public class Funcionario implements Serializable {
 
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-		String descricao, Long cpf, Hierarquia hierarquia, int aprovado) {
+		String descricao, Long cpf, int aprovado) {
 	super();
 	this.nome = nome;
 	this.email = email;
@@ -146,7 +143,6 @@ public class Funcionario implements Serializable {
 	this.senhaConfirm = senhaConfirm;
 	this.descricao = descricao;
 	this.cpf = cpf;
-	this.hierarquia = hierarquia;
 	this.aprovado = aprovado;
 
 }
@@ -328,16 +324,6 @@ public class Funcionario implements Serializable {
 
 	public void setLogin(Login login) {
 		this.login = login;
-	}
-
-
-	public Hierarquia getHierarquia() {
-		return hierarquia;
-	}
-
-
-	public void setHierarquia(Hierarquia hierarquia) {
-		this.hierarquia = hierarquia;
 	}
 
 	

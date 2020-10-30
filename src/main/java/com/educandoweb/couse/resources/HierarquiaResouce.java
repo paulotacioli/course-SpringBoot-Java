@@ -42,9 +42,9 @@ public class HierarquiaResouce {
 //		return ResponseEntity.noContent().build();
 //	}
 	
-	@GetMapping(value = "/{cpf}")
-	public ResponseEntity<String> encontrarChefe(@Valid @PathVariable long cpf){
-		String obj = service.encontrarChefe(cpf);
-		return ResponseEntity.ok().body(obj);
-	}
+//	@GetMapping(value = "/{cpf}")
+//	public ResponseEntity<String> encontrarChefe(@Valid @PathVariable long cpf){
+//		String obj = service.encontrarChefe(cpf);
+//		return ResponseEntity.ok().body(obj);
+//	}
 }

@@ -48,4 +48,11 @@ public class RegiaoResouce {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping(value = "/cidades/{estado}")
+	public ResponseEntity<List<Regiao>> findById(@PathVariable String estado){
+		List<Regiao> obj = service.findById(estado);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 }
