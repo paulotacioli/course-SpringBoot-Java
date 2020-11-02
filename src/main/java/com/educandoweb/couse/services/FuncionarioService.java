@@ -3,6 +3,8 @@ package com.educandoweb.couse.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,12 +12,14 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.HierarquiaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
+import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
 import com.educandoweb.couse.services.exceptions.ValidacaoTamanhoSenhaException;
@@ -128,4 +132,31 @@ public class FuncionarioService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-}//
+	
+	
+	public Funcionario atualizarFuncionario(Funcionario obj){
+		try {
+		
+			Funcionario entity = repository.findByCpf(obj.getCpf());
+			entity.setNome(obj.getNome());
+			entity.setEmail(obj.getEmail());
+			entity.setDescricao(obj.getDescricao());
+			entity.setFuncao(obj.getFuncao());
+			entity.setCelular(obj.getCelular());
+
+
+			return repository.save(entity);
+			
+	        
+		} catch (TransactionSystemException e) {
+			
+			throw new ViolationException ("Existem campos vazios!", null);
+
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException ("O recurso a ser aprovado nÃ£o existe na base. Atualize a pÃ¡gina e tente novamente.");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw new ErroNaoMapeadoException("Erro nÃ£o mapeado na aprovaÃ§Ã£o de corretores.");
+		}
+	}
+}
