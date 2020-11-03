@@ -60,17 +60,22 @@ public class Funcionario implements Serializable {
 	@NotEmpty
 	private String dataIntegracao = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
-	@NotEmpty
+	
 	private String dataCadastro = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+	
 	
 	@NotNull
 	private int aprovado;
 	
 	
-	
 	@NotNull
 	private int coordenador;
 	
+	@NotEmpty
+	private String urlFoto;
+	
+	@NotEmpty
+	private String urlCurriculo;
 	
 	
     @ManyToMany
@@ -95,7 +100,7 @@ public class Funcionario implements Serializable {
 	@JsonIgnore
 	private List<Pendencia> pendencias = new ArrayList<>();
 	
-	
+	 
 	@ManyToOne
 	@JoinColumn(name = "comite_id")
 	private Comite comite;
@@ -112,7 +117,7 @@ public class Funcionario implements Serializable {
 	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, Long cpf, int aprovado, int coordenador, Set<Skills> skill, 
+			String descricao, Long cpf, int aprovado, int coordenador, String urlFoto, String urlCurriculo, Set<Skills> skill, 
 			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
@@ -129,24 +134,10 @@ public class Funcionario implements Serializable {
 		this.funcao = funcao;
 		this.regiao = regiao;
 		this.comite = comite;
-
+		this.urlCurriculo = urlCurriculo;
+		this.urlFoto = urlFoto;
 	}
-
-
-	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-		String descricao, Long cpf, int aprovado) {
-	super();
-	this.nome = nome;
-	this.email = email;
-	this.celular = celular;
-	this.senha = senha;
-	this.senhaConfirm = senhaConfirm;
-	this.descricao = descricao;
-	this.cpf = cpf;
-	this.aprovado = aprovado;
-
-}
-
+	
 
 	public String getNome() {
 		return nome;
@@ -326,5 +317,24 @@ public class Funcionario implements Serializable {
 		this.login = login;
 	}
 
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
+
+	public String getUrlCurriculo() {
+		return urlCurriculo;
+	}
+
+
+	public void setUrlCurriculo(String urlCurriculo) {
+		this.urlCurriculo = urlCurriculo;
+	}	
 	
 }

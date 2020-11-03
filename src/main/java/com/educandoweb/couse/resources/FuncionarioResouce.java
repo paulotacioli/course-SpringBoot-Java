@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Regiao;
+import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.services.FuncionarioService;
 
 @RestController
@@ -50,9 +51,15 @@ public class FuncionarioResouce {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/atualizarFuncionario/{cpf}")
-	public ResponseEntity<Funcionario> findBycpf(@PathVariable Funcionario cpf){
-		Funcionario obj = service.atualizarFuncionario(cpf);
-		return ResponseEntity.ok().body(obj);
-	}
+//	@GetMapping(value = "/atualizarFuncionario/{cpf}")
+//	public ResponseEntity<Funcionario> findBycpf(@PathVariable Funcionario cpf){
+//		Funcionario obj = service.atualizarFuncionario(cpf);
+//		return ResponseEntity.ok().body(obj);
+//	}
+	
+//	@GetMapping(value = "/{nome}")
+//	public ResponseEntity<Funcionario> findByNome(@PathVariable String nome){
+//		Funcionario obj = service.findByNome(nome);
+//		return ResponseEntity.ok().body(obj);
+//	}
 }

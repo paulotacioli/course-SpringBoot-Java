@@ -6,4 +6,6 @@ import com.educandoweb.couse.entities.Skills;
 
 public interface SkillsRepository extends JpaRepository<Skills, Long>{
 
+//	List<Funcionario> findAllFuncionariosBySkill(String skill);
+
 }

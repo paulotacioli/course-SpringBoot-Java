@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educandoweb.couse.entities.Hierarquia;
+import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.services.HierarquiaService;
 
 @RestController
@@ -47,4 +48,10 @@ public class HierarquiaResouce {
 //		String obj = service.encontrarChefe(cpf);
 //		return ResponseEntity.ok().body(obj);
 //	}
+	
+	@GetMapping(value = "/encontrarChefe/{funcionario}")
+	public ResponseEntity<Hierarquia> findById(@PathVariable Long funcionario){
+		Hierarquia obj = service.encontrarChefe(funcionario);
+		return ResponseEntity.ok().body(obj);
+	}
 }

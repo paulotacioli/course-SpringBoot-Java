@@ -15,6 +15,7 @@ import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioNegadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioPendenteAprovacaoException;
+import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
 import com.educandoweb.couse.services.exceptions.UsuarioInvalidoException;
@@ -107,6 +108,14 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(CampoJaExisteException.class)
 	public ResponseEntity<StandardError> CampoJaExisteException(CampoJaExisteException e, HttpServletRequest request){
 		String error = "Campo ja existente.";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(ReferenciaInexistenteException.class)
+	public ResponseEntity<StandardError> ReferenciaInexistenteException(ReferenciaInexistenteException e, HttpServletRequest request){
+		String error = "Referencia a recurso que não existe!";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
 		return ResponseEntity.status(status).body(err);

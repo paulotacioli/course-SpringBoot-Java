@@ -12,14 +12,16 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
+import com.educandoweb.couse.entities.Regiao;
+import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.HierarquiaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
+import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
 import com.educandoweb.couse.services.exceptions.ValidacaoTamanhoSenhaException;
@@ -80,20 +82,21 @@ public class FuncionarioService {
 					System.out.println("FUNCIONARIO 77777777777777777777777777");
 					
 					
-					Hierarquia objHierarquia = new Hierarquia();
-					objHierarquia.setComite(obj.getComite().getId());
-					objHierarquia.setFuncionario(obj.getCpf());
-					objHierarquia.setRelacionamento('c');
-					hierarquiaRepository.save(objHierarquia);
-					System.out.println("FUNCIONARIO 999999999999999999999");
+//					Hierarquia objHierarquia = new Hierarquia();
+//					objHierarquia.setComite(obj.getComite().getId());
+//					objHierarquia.setFuncionario(obj.getCpf());
+//					objHierarquia.setRelacionamento('c');
+//					hierarquiaRepository.save(objHierarquia);
+//					System.out.println("FUNCIONARIO 999999999999999999999");
 					
 					repository.save(objEcp);
 					System.out.println("FUNCIONARIO 888888888888888888888888");
 
 								
 				}catch (DataIntegrityViolationException e) {
-						e.printStackTrace();
-				       throw new DatabaseException(obj.getCpf().toString());
+//						e.printStackTrace();
+					System.out.println("DEU MERDA POR ALGUM MOTIVOOOOOOOOOOOOOOO");
+				       throw new ReferenciaInexistenteException();
 				       
 					} catch (TransactionSystemException e) {
 						System.out.println("2");
@@ -111,12 +114,12 @@ public class FuncionarioService {
 					}
 					} else {
 						
-						throw new ValidacaoTamanhoSenhaException ("A senha deve conter no mÃ­nimo 6 caracteres!");
+						throw new ValidacaoTamanhoSenhaException ("A senha deve conter no maximo 6 caracteres!");
 					} 
 			}
 					
 		} else {
-			throw new SenhasDiferentesException ("Senhas no cadastro de corretores nÃ£o estÃ£o iguais.");
+			throw new SenhasDiferentesException ("Senhas no cadastro de corretores nao estao iguais.");
 		}
 			
 			return obj;
@@ -153,10 +156,15 @@ public class FuncionarioService {
 			throw new ViolationException ("Existem campos vazios!", null);
 
 		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException ("O recurso a ser aprovado nÃ£o existe na base. Atualize a pÃ¡gina e tente novamente.");
+			throw new ResourceNotFoundException ("O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
-			throw new ErroNaoMapeadoException("Erro nÃ£o mapeado na aprovaÃ§Ã£o de corretores.");
+			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
 		}
 	}
+
+//	public Funcionario findByNome(String nome) {
+//		Optional<Funcionario> obj = repository.findByNome(nome);
+//		return obj.orElseThrow(() -> new ResourceNotFoundException(nome));
+//	}
 }

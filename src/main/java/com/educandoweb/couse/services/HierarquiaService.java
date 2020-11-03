@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
+import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.HierarquiaRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
@@ -57,16 +58,14 @@ public class HierarquiaService {
 		}
 	}
 
-//	public String encontrarChefe(Long cpf){
-//
-//		Hierarquia obj = new  Hierarquia();
-//		obj = HierarquiaRepository.findByFuncionarioAndRelacionamento(cpf,'s');
-//		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
-//		Hierarquia objNovo = new Hierarquia();
-//		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
-//		System.out.println("imprmir o cpf do funcionario"+ objNovo.getFuncionario());
-//		Optional<Funcionario> objFunc = Optional.of(new Funcionario());
-//		objFunc = FuncionarioRepository.findById(objNovo.getFuncionario());
-//		return objFunc;
-//	}
+	public Hierarquia encontrarChefe(Long funcionario){
+
+		Hierarquia obj = new  Hierarquia();
+		obj = HierarquiaRepository.findByFuncionarioAndRelacionamento(funcionario,'s');
+		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
+		Hierarquia objNovo = new Hierarquia();
+		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
+		System.out.println("imprmir o cpf do funcionario"+ objNovo.getFuncionario());
+		return objNovo;
+	}
 }

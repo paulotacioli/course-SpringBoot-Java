@@ -16,14 +16,11 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_hierarquia")
 public class Hierarquia implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+
 	
 	private char relacionamento;
 	
-	
+	@Id
 	private Long funcionario;
 	
 	
@@ -34,7 +31,7 @@ public class Hierarquia implements Serializable {
 	}
 
 
-	public Hierarquia( char relacionamento, Long funcionario, Long comite) {
+	public Hierarquia(char relacionamento, Long funcionario, Long comite) {
 		super();
 		this.relacionamento = relacionamento;
 		this.funcionario = funcionario;
@@ -57,11 +54,6 @@ public class Hierarquia implements Serializable {
 	}
 
 
-	public char getRelacionamento() {
-		return relacionamento;
-	}
-
-
 	public Long getComite() {
 		return comite;
 	}
@@ -72,18 +64,25 @@ public class Hierarquia implements Serializable {
 	}
 
 
-	public int getId() {
-		return id;
+//	public int getId() {
+//		return id;
+//	}
+//
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
+
+
+	public char getRelacionamento() {
+		return relacionamento;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRelacionamento(char relacionamento) {
+		this.relacionamento = relacionamento;
 	}
-
-
-	public void setRelacionamento(char c) {
-		
-	}
+	
+	
 	
 }

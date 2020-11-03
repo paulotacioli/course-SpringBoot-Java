@@ -51,4 +51,10 @@ public class SkillsResouce {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+//	@GetMapping(value = "/funcionarios/{skill}")
+//	public ResponseEntity<List<Funcionario>> findFuncionarioBySkill(@PathVariable String skill){
+//		List<Funcionario> obj = service.findFuncionarioBySkill(skill);
+//		return ResponseEntity.ok().body(obj);
+//	}
 }
