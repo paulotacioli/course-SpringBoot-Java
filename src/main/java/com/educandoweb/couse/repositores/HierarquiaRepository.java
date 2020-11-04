@@ -7,7 +7,7 @@ import com.educandoweb.couse.entities.Hierarquia;
 
 public interface HierarquiaRepository extends JpaRepository<Hierarquia, Long>{
 
-	static Hierarquia findByFuncionarioAndRelacionamento(Long cpf, char s) {
+	static Hierarquia findByFuncionarioAndRelacionamento(Long funcionario, char s) {
 		return null;
 	}
 

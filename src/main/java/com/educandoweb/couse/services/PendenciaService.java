@@ -10,7 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.educandoweb.couse.entities.Funcao;
+import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Pendencia;
 import com.educandoweb.couse.repositores.PendenciaRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
@@ -22,21 +22,21 @@ import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 public class PendenciaService {
 	
 	@Autowired
-	private PendenciaRepository repository;
+	private PendenciaRepository pendenciaRepository;
 
 	public List<Pendencia> findAll(){
-		return repository.findAll();	
+		return pendenciaRepository.findAll();
 
 	}
 	
 	public Pendencia findById(Long id) {
-		Optional<Pendencia> obj = repository.findById(id);
+		Optional<Pendencia> obj = pendenciaRepository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Pendencia insert(Pendencia obj) {
 		try {
-			return repository.save(obj);
+			return pendenciaRepository.save(obj);
 		} catch (NullPointerException e) {
 			throw new CampoVazioException();
 		} catch (ConstraintViolationException e) {
@@ -48,11 +48,16 @@ public class PendenciaService {
 	
 	public void delete(Long id) {
 		try {
-			repository.deleteById(id);
+			pendenciaRepository.deleteById(id);
 		}catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
+	}
+	
+	public List<Pendencia> findPendenciaByFuncionario(Funcionario obj) {
+		List<Pendencia> objPendencias = pendenciaRepository.findAllByFuncionario(obj);
+		return objPendencias;
 	}
 }

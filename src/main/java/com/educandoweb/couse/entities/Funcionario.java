@@ -77,6 +77,9 @@ public class Funcionario implements Serializable {
 	@NotEmpty
 	private String urlCurriculo;
 	
+	@NotNull
+	private char hierarquia;
+	
 	
     @ManyToMany
     @JoinTable(name = "tb_funcionario_skill", 
@@ -117,7 +120,7 @@ public class Funcionario implements Serializable {
 	
 
 	public Funcionario( String nome, String email, String celular, String senha, String senhaConfirm,
-			String descricao, Long cpf, int aprovado, int coordenador, String urlFoto, String urlCurriculo, Set<Skills> skill, 
+			String descricao, Long cpf, int aprovado, int coordenador, String urlFoto, String urlCurriculo,  Set<Skills> skill, 
 			Funcao funcao, Regiao regiao, Comite comite) {
 		super();
 	
@@ -335,6 +338,16 @@ public class Funcionario implements Serializable {
 
 	public void setUrlCurriculo(String urlCurriculo) {
 		this.urlCurriculo = urlCurriculo;
-	}	
+	}
+
+
+	public char getHierarquia() {
+		return hierarquia;
+	}
+
+
+	public void setHierarquia(char hierarquia) {
+		this.hierarquia = hierarquia;
+	}
 	
 }

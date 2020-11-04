@@ -15,10 +15,9 @@ import org.springframework.transaction.TransactionSystemException;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
-import com.educandoweb.couse.entities.Regiao;
-import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.HierarquiaRepository;
+import com.educandoweb.couse.repositores.PendenciaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
@@ -38,6 +37,9 @@ public class FuncionarioService {
 	
 	@Autowired
 	private HierarquiaRepository hierarquiaRepository;
+	
+	@Autowired
+	private PendenciaRepository PendenciaRepository;
 
 
 	public List<Funcionario> findAll(){
@@ -79,23 +81,27 @@ public class FuncionarioService {
 
 					
 					loginService.saveLoginFuncionario(objEcp);
-					System.out.println("FUNCIONARIO 77777777777777777777777777");
+					System.out.println("Salvou no login service!");
 					
 					
-//					Hierarquia objHierarquia = new Hierarquia();
-//					objHierarquia.setComite(obj.getComite().getId());
-//					objHierarquia.setFuncionario(obj.getCpf());
-//					objHierarquia.setRelacionamento('c');
-//					hierarquiaRepository.save(objHierarquia);
-//					System.out.println("FUNCIONARIO 999999999999999999999");
+					Hierarquia objHierarquia = new Hierarquia();
+					System.out.println("chegou 1");
+					objHierarquia.setComite(obj.getComite().getId());
+					System.out.println("chegou 2");
+					objHierarquia.setFuncionario(obj.getCpf());
+					System.out.println("chegou 3");
+					objHierarquia.setRelacionamento(obj.getHierarquia());
+					System.out.println("chegou 4");
+					hierarquiaRepository.save(objHierarquia);
+					System.out.println("chegou 5");
 					
 					repository.save(objEcp);
-					System.out.println("FUNCIONARIO 888888888888888888888888");
+					System.out.println("TERMINOU COM SUCESSOOOOOOOO!!!!!!!!");
 
 								
 				}catch (DataIntegrityViolationException e) {
 //						e.printStackTrace();
-					System.out.println("DEU MERDA POR ALGUM MOTIVOOOOOOOOOOOOOOO");
+					System.out.println("DEU MERDA!!");
 				       throw new ReferenciaInexistenteException();
 				       
 					} catch (TransactionSystemException e) {
@@ -162,7 +168,8 @@ public class FuncionarioService {
 			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
 		}
 	}
-
+	
+	
 //	public Funcionario findByNome(String nome) {
 //		Optional<Funcionario> obj = repository.findByNome(nome);
 //		return obj.orElseThrow(() -> new ResourceNotFoundException(nome));

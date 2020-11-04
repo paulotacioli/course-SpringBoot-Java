@@ -38,11 +38,6 @@ public class Hierarquia implements Serializable {
 		this.comite = comite;
 	}
 
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 	public Long getFuncionario() {
 		return funcionario;
@@ -62,16 +57,6 @@ public class Hierarquia implements Serializable {
 	public void setComite(Long comite) {
 		this.comite = comite;
 	}
-
-
-//	public int getId() {
-//		return id;
-//	}
-//
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 
 
 	public char getRelacionamento() {

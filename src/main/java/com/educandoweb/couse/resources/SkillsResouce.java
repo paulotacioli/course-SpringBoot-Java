@@ -52,9 +52,9 @@ public class SkillsResouce {
 		return ResponseEntity.noContent().build();
 	}
 	
-//	@GetMapping(value = "/funcionarios/{skill}")
-//	public ResponseEntity<List<Funcionario>> findFuncionarioBySkill(@PathVariable String skill){
-//		List<Funcionario> obj = service.findFuncionarioBySkill(skill);
+//	@PostMapping(value = "/funcionariosPorSkill")
+//	public ResponseEntity<List<Funcionario>> findAllBySkillIn(@PathVariable List<Skills> id){
+//		List<Funcionario> obj = service.findAllBySkillIn(id);
 //		return ResponseEntity.ok().body(obj);
 //	}
 }

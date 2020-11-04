@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.SkillsRepository;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
@@ -53,8 +54,8 @@ public class SkillsService {
 		}
 	}
 
-//	public List<Funcionario> findFuncionarioBySkill(String skill) {
-//		List<Funcionario> obj = repository.findAllFuncionariosBySkill(skill);
+//	public List<Funcionario> findAllBySkillIn(List<Skills> id) {
+//		List<Funcionario> obj = repository.findAllBySkillIn(id);
 //		return obj;
 //	}
 }

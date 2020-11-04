@@ -31,8 +31,8 @@ public class HierarquiaService {
 
 	}
 	
-	public Hierarquia findById(Long id) {
-		Optional<Hierarquia> obj = repository.findById(id);
+	public Hierarquia findById(Long funcionario) {
+		Optional<Hierarquia> obj = repository.findById(funcionario);
 		return obj.get();
 	}
 	
@@ -48,11 +48,11 @@ public class HierarquiaService {
 		}
 	}
 	
-	public void delete(Long id) {
+	public void delete(Long funcionario) {
 		try {
-			repository.deleteById(id);
+			repository.deleteById(funcionario);
 		}catch (EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException(id);
+			throw new ResourceNotFoundException(funcionario);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
@@ -65,7 +65,7 @@ public class HierarquiaService {
 		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
 		Hierarquia objNovo = new Hierarquia();
 		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
-		System.out.println("imprmir o cpf do funcionario"+ objNovo.getFuncionario());
+		System.out.println("imprmir o cpf do chefe"+ objNovo.getFuncionario());
 		return objNovo;
 	}
 }
