@@ -47,7 +47,7 @@ public class JwtAuthenticationController {
 		if (funcionario.getAprovado() == 0) {
 			System.out.println("Aqui entrou no funcionario getAprovado = 0");
 			throw new FuncionarioPendenteAprovacaoException("Pendente aprovação.");
-		} else if (funcionario.getAprovado() != 1 && funcionario.getAprovado() != 2) {
+		} else if (funcionario.getAprovado() != 1 && funcionario.getAprovado() != 2 && funcionario.getAprovado() != 10) {
 			System.out.println("Aqui entrou no funcionario getAprovado = 1");
 			throw new FuncionarioNegadoException ("Não aprovado.");
 		} 
