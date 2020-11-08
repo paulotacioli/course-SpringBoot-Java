@@ -17,10 +17,13 @@ import javax.validation.constraints.NotNull;
 public class Hierarquia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	private char relacionamento;
 	
-	@Id
+	
 	private Long funcionario;
 	
 	
@@ -66,6 +69,12 @@ public class Hierarquia implements Serializable {
 
 	public void setRelacionamento(char relacionamento) {
 		this.relacionamento = relacionamento;
+	}
+
+
+	public String setComite(String comite) {
+		return comite;
+		
 	}
 	
 	

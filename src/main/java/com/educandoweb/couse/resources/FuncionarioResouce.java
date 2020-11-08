@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Funcionario;
-import com.educandoweb.couse.entities.Pendencia;
-import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.services.FuncionarioService;
 
 @RestController
@@ -63,5 +62,27 @@ public class FuncionarioResouce {
 //		return ResponseEntity.ok().body(obj);
 //	}
 	
+	@PutMapping(value = "/pendentes/aprovar")
+	public ResponseEntity<List<Funcionario>> aprovarFuncionarios (@RequestBody List<Funcionario> obj){
+		obj = service.aprovarFuncionarios(obj);
+	 return ResponseEntity.ok().body(obj);
+	}
 	
+	@PutMapping(value = "/atualizar-foto")
+	public boolean atualizarFoto (@RequestBody Funcionario obj){
+		return service.atualizarFoto(obj);
+	 
+	}
+	
+	@PutMapping(value = "/atualizar-curriculo")
+	public boolean atualizarCurriculo (@RequestBody Funcionario obj){
+		return service.atualizarCurriculo(obj);
+	 
+	}
+	
+	@GetMapping(value = "/pendentes")
+	public ResponseEntity<List<Funcionario>> findPendentes(){
+		List<Funcionario> list = service.findPendentes();
+		return ResponseEntity.ok().body(list);
+	}
 }

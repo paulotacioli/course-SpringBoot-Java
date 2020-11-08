@@ -77,9 +77,6 @@ public class Funcionario implements Serializable {
 	@NotEmpty
 	private String urlCurriculo;
 	
-	@NotNull
-	private char hierarquia;
-	
 	
     @ManyToMany
     @JoinTable(name = "tb_funcionario_skill", 
@@ -339,15 +336,4 @@ public class Funcionario implements Serializable {
 	public void setUrlCurriculo(String urlCurriculo) {
 		this.urlCurriculo = urlCurriculo;
 	}
-
-
-	public char getHierarquia() {
-		return hierarquia;
-	}
-
-
-	public void setHierarquia(char hierarquia) {
-		this.hierarquia = hierarquia;
-	}
-	
 }

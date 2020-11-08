@@ -37,11 +37,7 @@ public class Comite implements Serializable {
 	
 	public Comite() {
 	}
-
-	public Comite(String comite) {
-		super();
-		this.comite = comite;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -51,17 +47,26 @@ public class Comite implements Serializable {
 		this.id = id;
 	}
 
+
+	public List<Funcionario> getFuncionario() {
+		return funcionario;
+	}
+
+
 	public String getComite() {
 		return comite;
 	}
+
 
 	public void setComite(String comite) {
 		this.comite = comite;
 	}
 
-	public List<Funcionario> getFuncionario() {
-		return funcionario;
+
+	public void setFuncionario(List<Funcionario> funcionario) {
+		this.funcionario = funcionario;
 	}
+
 
 	@Override
 	public int hashCode() {

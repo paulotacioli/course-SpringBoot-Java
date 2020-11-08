@@ -13,6 +13,7 @@ import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
+import com.educandoweb.couse.services.exceptions.FalhaPermissaoHierarquiaException;
 import com.educandoweb.couse.services.exceptions.FuncionarioNegadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioPendenteAprovacaoException;
 import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
@@ -118,6 +119,14 @@ public class ResourceExceptionHandler {
 		String error = "Referencia a recurso que não existe!";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(FalhaPermissaoHierarquiaException.class)
+	public ResponseEntity<StandardError> FalhaPermissaoHierarquiaException(FalhaPermissaoHierarquiaException e, HttpServletRequest request){
+		String error = "Sem permissão para atualizar a hierarquia do funcionario!";
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 }

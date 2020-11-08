@@ -1,5 +1,6 @@
 package com.educandoweb.couse.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
-import com.educandoweb.couse.entities.Regiao;
+import com.educandoweb.couse.entities.Time;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
 import com.educandoweb.couse.repositores.HierarquiaRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
@@ -22,20 +23,23 @@ import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class HierarquiaService {
-	
+
 	@Autowired
 	private HierarquiaRepository repository;
 
-	public List<Hierarquia> findAll(){
-		return repository.findAll();	
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;
+
+	public List<Hierarquia> findAll() {
+		return repository.findAll();
 
 	}
-	
+
 	public Hierarquia findById(Long funcionario) {
 		Optional<Hierarquia> obj = repository.findById(funcionario);
 		return obj.get();
 	}
-	
+
 	public Hierarquia insert(Hierarquia obj) {
 		try {
 			return repository.save(obj);
@@ -47,25 +51,54 @@ public class HierarquiaService {
 			throw new CampoJaExisteException();
 		}
 	}
-	
+
 	public void delete(Long funcionario) {
 		try {
 			repository.deleteById(funcionario);
-		}catch (EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(funcionario);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
 
-	public Hierarquia encontrarChefe(Long funcionario){
-
-		Hierarquia obj = new  Hierarquia();
-		obj = HierarquiaRepository.findByFuncionarioAndRelacionamento(funcionario,'s');
-		System.out.println("imprimir o comite dessa pessoa" + obj.getComite());
-		Hierarquia objNovo = new Hierarquia();
-		objNovo = HierarquiaRepository.findByComiteAndRelacionamento(obj.getComite(),'c');
-		System.out.println("imprmir o cpf do chefe"+ objNovo.getFuncionario());
-		return objNovo;
+	public Time encontrarChefe(Long cpf) {
+		Funcionario objFunc = new Funcionario();
+		Hierarquia objChefe = new Hierarquia();
+		if (repository.findByFuncionarioAndRelacionamento(cpf, 's') != null) {
+			objChefe = repository.findByFuncionarioAndRelacionamento(cpf, 's');
+			System.out.println("imprimir o comite dessa pessoa" + objChefe.getComite());
+			Hierarquia objNovo = new Hierarquia();
+			objNovo = repository.findByComiteAndRelacionamento(objChefe.getComite(), 'c');
+			System.out.println("imprmir o cpf do chefe" + objNovo.getFuncionario());
+			objFunc = funcionarioRepository.findByCpf(objNovo.getFuncionario());
+			Time objTime = new Time();
+			objTime.setCpf(objNovo.getFuncionario());
+			objTime.setNome(objFunc.getNome());
+			return objTime;
+		} else {
+			return null;
+		}
 	}
+
+	public List<Time> encontrarTime(Long cpf) {
+		Funcionario objFunc = new Funcionario();
+		objFunc = funcionarioRepository.findByCpf(cpf);
+		// não é chefe
+		List<Hierarquia> list = new ArrayList<Hierarquia>();
+		list = repository.findAllByComiteAndRelacionamento(objFunc.getComite().getId(), 's');
+		List<Time> timeLista = new ArrayList<Time>();
+		for (Hierarquia objAtual : list) {
+			Time objTime = new Time();
+			objTime.setCpf(objAtual.getFuncionario());
+			objTime.setNome(funcionarioRepository.findByCpf(objAtual.getFuncionario()).getNome());
+			
+			if (!cpf.toString().equals(objAtual.getFuncionario().toString())) {
+				timeLista.add(objTime);
+			}
+		}
+
+		return timeLista;
+	}
+
 }
