@@ -35,6 +35,10 @@ public class Regiao implements Serializable {
 	@JsonIgnore
 	private List<Funcionario> funcionario = new ArrayList<>();
 	
+	@OneToMany (mappedBy = "regiao")
+	@JsonIgnore
+	private List<Comite> comite = new ArrayList<>();
+	
 	public Regiao() {
 	}
 

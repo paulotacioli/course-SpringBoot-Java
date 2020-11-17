@@ -2,9 +2,7 @@ package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -22,10 +18,10 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_comite", uniqueConstraints=
-@UniqueConstraint(columnNames={"comite"}))
+@Table(name = "tb_acao", uniqueConstraints=
+@UniqueConstraint(columnNames={"acao"}))
 
-public class Comite implements Serializable {
+public class Acao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,35 +29,40 @@ public class Comite implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	private String comite;
+	private String acao;
 	
 	@Column(length = 5000)
 	@NotEmpty
 	private String descricao;
 	
+	@Column(length = 5000)
+	@NotEmpty
+	private String como;
+	
 	@NotEmpty
 	private String dataCriacao = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-
-
-	@ManyToOne
-	@JoinColumn(name = "regiao_id")
-	private Regiao regiao;
+	
 	
 	@NotEmpty
-	private String urlFoto;
-	
-	
-	@OneToMany(mappedBy = "comite")
-	@JsonIgnore
-	private List<Funcionario> funcionario = new ArrayList<>();
-	
-	
-	@OneToMany(mappedBy = "comite")
+	private String dataLimite = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
-	private List<Objetivo> objetivo = new ArrayList<>();
+	
+	@ManyToOne
+
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
 	
 	
-	public Comite() {
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "objetivo_id")
+	private Objetivo objetivo;
+	
+
+	
+	
+	
+	public Acao() {
 	}
 	
 
@@ -69,30 +70,21 @@ public class Comite implements Serializable {
 		return id;
 	}
 
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-	public List<Funcionario> getFuncionario() {
-		return funcionario;
-	}
-
-
-	public String getComite() {
-		return comite;
-	}
-
-
-	public void setComite(String comite) {
-		this.comite = comite;
-	}
-
-
-	public void setFuncionario(List<Funcionario> funcionario) {
-		this.funcionario = funcionario;
-	}
 	
+
+	public String getComo() {
+		return como;
+	}
+
+
+	public void setComo(String como) {
+		this.como = como;
+	}
 
 
 	public String getDescricao() {
@@ -115,33 +107,48 @@ public class Comite implements Serializable {
 	}
 
 
-	public Regiao getRegiao() {
-		return regiao;
-	}
 
-
-	public void setRegiao(Regiao regiao) {
-		this.regiao = regiao;
-	}
-
-
-	public String getUrlFoto() {
-		return urlFoto;
-	}
-
-
-	public void setUrlFoto(String urlFoto) {
-		this.urlFoto = urlFoto;
-	}
-
-
-	public List<Objetivo> getObjetivo() {
+	public Objetivo getObjetivo() {
 		return objetivo;
 	}
 
 
-	public void setObjetivo(List<Objetivo> objetivo) {
+	public void setObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
+	}
+
+
+	public String getAcao() {
+		return acao;
+	}
+
+
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
+
+
+	public String getDataLimite() {
+		return dataLimite;
+	}
+
+
+	public void setDataLimite(String dataLimite) {
+		this.dataLimite = dataLimite;
+	}
+
+
+	public Funcionario getFuncionario() {
+		Funcionario func = new Funcionario ();
+		func.setCpf(funcionario.getCpf());
+		func.setNome(funcionario.getNome());
+
+		return func;
+	}
+
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 
@@ -161,7 +168,7 @@ public class Comite implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Comite other = (Comite) obj;
+		Acao other = (Acao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

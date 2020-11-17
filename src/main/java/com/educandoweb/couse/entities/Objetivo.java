@@ -1,9 +1,7 @@
 package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -22,10 +19,10 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_comite", uniqueConstraints=
-@UniqueConstraint(columnNames={"comite"}))
+@Table(name = "tb_objetivo", uniqueConstraints=
+@UniqueConstraint(columnNames={"titulo"}))
 
-public class Comite implements Serializable {
+public class Objetivo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,35 +30,25 @@ public class Comite implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	private String comite;
+	private String titulo;
 	
 	@Column(length = 5000)
 	@NotEmpty
 	private String descricao;
 	
-	@NotEmpty
-	private String dataCriacao = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-
-
 	@ManyToOne
-	@JoinColumn(name = "regiao_id")
-	private Regiao regiao;
-	
-	@NotEmpty
-	private String urlFoto;
-	
-	
-	@OneToMany(mappedBy = "comite")
-	@JsonIgnore
-	private List<Funcionario> funcionario = new ArrayList<>();
-	
-	
-	@OneToMany(mappedBy = "comite")
 
-	private List<Objetivo> objetivo = new ArrayList<>();
+	@JoinColumn(name = "comite_id")
+	private Comite comite;
+
 	
+	@OneToMany(mappedBy = "objetivo")
+
+	private List<Acao> acao = new ArrayList<>();
+
+
 	
-	public Comite() {
+	public Objetivo() {
 	}
 	
 
@@ -72,27 +59,17 @@ public class Comite implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-	public List<Funcionario> getFuncionario() {
-		return funcionario;
-	}
-
-
-	public String getComite() {
-		return comite;
-	}
-
-
-	public void setComite(String comite) {
-		this.comite = comite;
-	}
-
-
-	public void setFuncionario(List<Funcionario> funcionario) {
-		this.funcionario = funcionario;
-	}
 	
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 
 	public String getDescricao() {
@@ -105,43 +82,23 @@ public class Comite implements Serializable {
 	}
 
 
-	public String getDataCriacao() {
-		return dataCriacao;
+	public Comite getComite() {
+		return comite;
 	}
 
 
-	public void setDataCriacao(String dataCriacao) {
-		this.dataCriacao = dataCriacao;
+	public void setComite(Comite comite) {
+		this.comite = comite;
 	}
 
 
-	public Regiao getRegiao() {
-		return regiao;
+	public List<Acao> getAcao() {
+		return acao;
 	}
 
 
-	public void setRegiao(Regiao regiao) {
-		this.regiao = regiao;
-	}
-
-
-	public String getUrlFoto() {
-		return urlFoto;
-	}
-
-
-	public void setUrlFoto(String urlFoto) {
-		this.urlFoto = urlFoto;
-	}
-
-
-	public List<Objetivo> getObjetivo() {
-		return objetivo;
-	}
-
-
-	public void setObjetivo(List<Objetivo> objetivo) {
-		this.objetivo = objetivo;
+	public void setAcao(List<Acao> acao) {
+		this.acao = acao;
 	}
 
 
@@ -161,7 +118,7 @@ public class Comite implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Comite other = (Comite) obj;
+		Objetivo other = (Objetivo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
