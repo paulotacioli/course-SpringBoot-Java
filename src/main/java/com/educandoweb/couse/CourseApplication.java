@@ -21,7 +21,7 @@ public class CourseApplication implements WebMvcConfigurer {
 	@Override  
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-		.allowedMethods("GET","POST","PUT","DELETE", "OPTIONS")
+		.allowedMethods("PUT","GET","POST","DELETE", "OPTIONS")
 	    .allowedHeaders( "*" )
         .allowCredentials( false )
         .exposedHeaders( "Authorization" )
