@@ -160,8 +160,10 @@ public class FuncionarioService {
 			entity.setNome(obj.getNome());
 			entity.setEmail(obj.getEmail());
 			entity.setDescricao(obj.getDescricao());
-			entity.setFuncao(obj.getFuncao());
 			entity.setCelular(obj.getCelular());
+			entity.setDataNascimento(obj.getDataNascimento());
+			entity.setDataCadastro(obj.getDataCadastro());
+			entity.setRegiao(obj.getRegiao());
 
 			return repository.save(entity);
 
@@ -177,6 +179,30 @@ public class FuncionarioService {
 			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
 		}
 	}
+	
+	public Funcionario atualizarSkill(Funcionario obj) {
+		try {
+
+			Funcionario entity = repository.findByCpf(obj.getCpf());
+			if (obj.getSkill().size() >= 1) {
+				entity.setSkill(obj.getSkill());
+			}
+
+			return repository.save(entity);
+
+		} catch (TransactionSystemException e) {
+
+			throw new ViolationException("Existem campos vazios!", null);
+
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(
+					"O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
+		}
+	}
+
 
 	public boolean inserirHierarquia(Funcionario obj) {
 

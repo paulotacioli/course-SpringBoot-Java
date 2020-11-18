@@ -49,20 +49,9 @@ public class FuncionarioResouce {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 	
-//	@GetMapping(value = "/atualizarFuncionario/{cpf}")
-//	public ResponseEntity<Funcionario> findBycpf(@PathVariable Funcionario cpf){
-//		Funcionario obj = service.atualizarFuncionario(cpf);
-//		return ResponseEntity.ok().body(obj);
-//	}
-	
-//	@GetMapping(value = "/{nome}")
-//	public ResponseEntity<Funcionario> findByNome(@PathVariable String nome){
-//		Funcionario obj = service.findByNome(nome);
-//		return ResponseEntity.ok().body(obj);
-//	}
-	
-	@PutMapping(value = "/pendentes/aprovar")
+	@PostMapping(value = "/pendentes/aprovar")
 	public ResponseEntity<List<Funcionario>> aprovarFuncionarios (@RequestBody List<Funcionario> obj){
 		obj = service.aprovarFuncionarios(obj);
 	 return ResponseEntity.ok().body(obj);
@@ -85,4 +74,21 @@ public class FuncionarioResouce {
 		List<Funcionario> list = service.findPendentes();
 		return ResponseEntity.ok().body(list);
 	}
+	
+	@PutMapping(value = "/atualizar-dados")
+	public ResponseEntity<Funcionario> atualizarDados (@RequestBody Funcionario obj){
+		obj = service.atualizarFuncionario(obj);
+		return ResponseEntity.ok().body(obj);
+	 
+	}
+	
+	@PutMapping(value = "/atualizar-skill")
+	public ResponseEntity<Funcionario> atualizarSkill (@RequestBody Funcionario obj){
+		obj = service.atualizarSkill(obj);
+		return ResponseEntity.ok().body(obj);
+	 
+	}
+
 }
+
+
