@@ -54,7 +54,8 @@ public class FuncionarioResouce {
 	@PostMapping(value = "/pendentes/aprovar")
 	public ResponseEntity<List<Funcionario>> aprovarFuncionarios (@RequestBody List<Funcionario> obj){
 		obj = service.aprovarFuncionarios(obj);
-	 return ResponseEntity.ok().body(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(1).toUri();
+		return ResponseEntity.created(uri).body(obj);
 	}
 	
 	@PutMapping(value = "/atualizar-foto")
