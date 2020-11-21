@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcao;
+import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.repositores.FuncaoRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
+import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 
 @Service

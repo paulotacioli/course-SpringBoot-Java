@@ -10,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.repositores.SkillsRepository;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;

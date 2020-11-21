@@ -36,7 +36,6 @@ public class SkillsResouce {
 		Skills obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
 
 	
 	@PostMapping
@@ -51,10 +50,4 @@ public class SkillsResouce {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-//	@PostMapping(value = "/funcionariosPorSkill")
-//	public ResponseEntity<List<Funcionario>> findAllBySkillIn(@PathVariable List<Skills> id){
-//		List<Funcionario> obj = service.findAllBySkillIn(id);
-//		return ResponseEntity.ok().body(obj);
-//	}
 }

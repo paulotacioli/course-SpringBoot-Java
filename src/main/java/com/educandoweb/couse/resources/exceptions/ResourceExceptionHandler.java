@@ -16,6 +16,8 @@ import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.FalhaPermissaoHierarquiaException;
 import com.educandoweb.couse.services.exceptions.FuncionarioNegadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioPendenteAprovacaoException;
+import com.educandoweb.couse.services.exceptions.JaTemCoordenadorHierarquiaException;
+import com.educandoweb.couse.services.exceptions.NaoPodeTransferirParaComiteHierarquiaException;
 import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
@@ -105,6 +107,20 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
 		return ResponseEntity.status(status).body(err);
 	}
+	@ExceptionHandler(NaoPodeTransferirParaComiteHierarquiaException.class)
+	public ResponseEntity<StandardError> NaoPodeTransferirParaComiteHierarquiaException(NaoPodeTransferirParaComiteHierarquiaException e, HttpServletRequest request){
+		String error = "Transferências entre coordenadores não podem ocorrer até que o cargo de coordenador do comitê destino esteja liberada!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
+		return ResponseEntity.status(status).body(err);
+	}
+	@ExceptionHandler(JaTemCoordenadorHierarquiaException.class)
+	public ResponseEntity<StandardError> JaTemCoordenadorHierarquiaException(JaTemCoordenadorHierarquiaException e, HttpServletRequest request){
+		String error = "Já existe coordenador nesse comite!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
+		return ResponseEntity.status(status).body(err);
+	}
 	
 	@ExceptionHandler(CampoJaExisteException.class)
 	public ResponseEntity<StandardError> CampoJaExisteException(CampoJaExisteException e, HttpServletRequest request){
@@ -113,7 +129,6 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
 		return ResponseEntity.status(status).body(err);
 	}
-	
 	@ExceptionHandler(ReferenciaInexistenteException.class)
 	public ResponseEntity<StandardError> ReferenciaInexistenteException(ReferenciaInexistenteException e, HttpServletRequest request){
 		String error = "Referencia a recurso que não existe!";

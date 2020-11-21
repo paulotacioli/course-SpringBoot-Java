@@ -24,6 +24,7 @@ import com.educandoweb.couse.repositores.PendenciaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.FalhaPermissaoHierarquiaException;
+import com.educandoweb.couse.services.exceptions.JaTemCoordenadorHierarquiaException;
 import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.couse.services.exceptions.SenhasDiferentesException;
@@ -205,32 +206,58 @@ public class FuncionarioService {
 
 
 	public boolean inserirHierarquia(Funcionario obj) {
+		try{
+			System.out.println('1');
+
 
 		List<Hierarquia> hierarquia = new ArrayList<Hierarquia>();
 		hierarquia = hierarquiaRepository.findAllByFuncionario(obj.getCpf());
 		if (hierarquia.size() == 0) {
+			System.out.println('2');
 
 			if (obj.getCoordenador() == 1) {
+				System.out.println('3');
+
 				if (obj.getComite().getId() != 2 && obj.getComite().getId() != 1) {
+					System.out.println('4');
 
 					// inserir ele como subordinado do comite 2
 					Hierarquia objHierarquia = new Hierarquia();
 					objHierarquia.setComite((long) 2);
 					objHierarquia.setFuncionario(obj.getCpf());
 					objHierarquia.setRelacionamento('s');
-					hierarquiaRepository.save(objHierarquia);
+					
+					System.out.println('5');
 
 					// inserir ele como coordenador do obj.getComite()
+					//verificar se ja existe cooredenador do obj.getComite()
+					Hierarquia verificacao = hierarquiaRepository.findByComiteAndRelacionamento(obj.getComite().getId(), 'c');
+					if (verificacao != null) {
+						System.out.println('6');
+
+						throw new JaTemCoordenadorHierarquiaException();
+					} 
 					Hierarquia objHierarquia2 = new Hierarquia();
 					objHierarquia2.setComite(obj.getComite().getId());
 					objHierarquia2.setFuncionario(obj.getCpf());
 					objHierarquia2.setRelacionamento('c');
+					hierarquiaRepository.save(objHierarquia);
 					hierarquiaRepository.save(objHierarquia2);
 					return true;
 
 				} else {
+					System.out.println('7');
+
 					if (obj.getComite().getId() == 1) {
 						// inserir ele como coordenador do comite presidencial
+						Hierarquia verificacao = hierarquiaRepository.findByComiteAndRelacionamento((long)1, 'c');
+						if (verificacao != null) {
+							System.out.println('0');
+
+							throw new JaTemCoordenadorHierarquiaException();
+						} 
+						System.out.println('8');
+
 						Hierarquia objHierarquia = new Hierarquia();
 						objHierarquia.setComite(obj.getComite().getId());
 						objHierarquia.setFuncionario(obj.getCpf());
@@ -239,21 +266,32 @@ public class FuncionarioService {
 						return true;
 
 					} else {
+						System.out.println('9');
+
 						// ele é do comite>2
 						// inserir ele como coordenador do comite obj.getComite
 						// inserir ele como subordinado do comite 1
+						Hierarquia verificacao = hierarquiaRepository.findByComiteAndRelacionamento((long)2, 'c');
+						if (verificacao != null) {
+							
+
+							throw new JaTemCoordenadorHierarquiaException();
+						} 		
+						System.out.println('a');
 
 						Hierarquia objHierarquia = new Hierarquia();
 						objHierarquia.setComite(obj.getComite().getId());
 						objHierarquia.setFuncionario(obj.getCpf());
 						objHierarquia.setRelacionamento('c');
-						hierarquiaRepository.save(objHierarquia);
+					
+						System.out.println('d');
 
 						Hierarquia objHierarquia2 = new Hierarquia();
 						objHierarquia2.setComite((long) 1);
 						objHierarquia2.setFuncionario(obj.getCpf());
 						objHierarquia2.setRelacionamento('s');
 						hierarquiaRepository.save(objHierarquia2);
+						hierarquiaRepository.save(objHierarquia);
 						return true;
 
 					}
@@ -262,16 +300,26 @@ public class FuncionarioService {
 
 			} else {
 				// inserir ele como subordinado do comite obj.getComite()
+				System.out.println('e');
+
 				Hierarquia objHierarquia = new Hierarquia();
 				objHierarquia.setComite(obj.getComite().getId());
 				objHierarquia.setFuncionario(obj.getCpf());
 				objHierarquia.setRelacionamento('s');
 				hierarquiaRepository.save(objHierarquia);
 				return true;
-
+			
 			}
 		} else {
+			System.out.println('3');
+
 			throw new FalhaPermissaoHierarquiaException();
+		}
+		} catch (FalhaPermissaoHierarquiaException e) {
+			throw new FalhaPermissaoHierarquiaException();
+
+		} catch (JaTemCoordenadorHierarquiaException e) {
+			throw new JaTemCoordenadorHierarquiaException();
 		}
 
 	}
@@ -320,6 +368,8 @@ public class FuncionarioService {
 					"O recurso a ser aprovado não existe na base. Atualize a página e tente novamente.");
 		} catch (FalhaPermissaoHierarquiaException e) {
 			throw new FalhaPermissaoHierarquiaException();
+		} catch (JaTemCoordenadorHierarquiaException e) {
+			throw new JaTemCoordenadorHierarquiaException();
 
 		} catch (RuntimeException e) {
 			throw new ErroNaoMapeadoException("Erro não mapeado na aprovação de funcionarios.");
