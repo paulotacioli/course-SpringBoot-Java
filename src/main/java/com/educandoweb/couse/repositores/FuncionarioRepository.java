@@ -17,6 +17,4 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
 	List<Funcionario> findAllByAprovado(int aprovado);
 	
-//	Optional<Funcionario> findByNome(String nome);
-
 }

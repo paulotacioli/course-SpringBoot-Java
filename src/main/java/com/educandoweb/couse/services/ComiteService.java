@@ -11,10 +11,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Comite;
+import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.repositores.ComiteRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
+import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -52,6 +54,25 @@ public class ComiteService {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public boolean atualizarFotoComite(Comite obj) {
+		try {
+			System.out.println("entrou 1");
+		Comite entity = repository.getOne(obj.getId());
+		entity.toString();
+		System.out.println("entrou 2");
+		entity.setUrlFoto(obj.getUrlFoto());
+		System.out.println("entrou 3");
+		System.out.println(obj.getId());
+		System.out.println(obj.getUrlFoto());
+		System.out.println(entity.toString());
+		repository.save(entity);
+		System.out.println("entrou 4");
+		return true;
+		} catch (RuntimeException e) {
+			throw new ErroNaoMapeadoException("Erro não mapeado na aprovação de funcionarios.");
 		}
 	}
 }
