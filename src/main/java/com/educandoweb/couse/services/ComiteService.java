@@ -79,6 +79,8 @@ public class ComiteService {
 			entity.setComite(obj.getComite());
 			entity.setDescricao(obj.getDescricao());
 			entity.setDataCriacao(obj.getDataCriacao());
+			entity.setRegiao(obj.getRegiao());
+
 			
 			return repository.save(entity);
 
@@ -91,7 +93,7 @@ public class ComiteService {
 					"O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
-			throw new ErroNaoMapeadoException("Erro nao mapeado.");
+			throw new ErroNaoMapeadoException("Erro não mapeado. Favor tentar mais tarde, em caso de persistencia contatar a equipe de TI.");
 		}
 	}
 
