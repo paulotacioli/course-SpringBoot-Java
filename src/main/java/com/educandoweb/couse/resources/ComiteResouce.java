@@ -56,4 +56,12 @@ public class ComiteResouce {
 		return service.atualizarFotoComite(obj);
 	 
 	}
+	
+	
+	@PutMapping(value = "/atualizar-dados")
+	public ResponseEntity<Comite> atualizarDadosComite (@RequestBody Comite obj){
+		obj = service.atualizarComite(obj);
+		return ResponseEntity.ok().body(obj);
+	 
+	}
 }

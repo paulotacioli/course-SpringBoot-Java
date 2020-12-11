@@ -11,7 +11,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
 	boolean existsById(Long cpf);
 
-	Funcionario findByCpf(Long cpf);
+	Funcionario findByCpf(Long cpf); 
 
 	List<Pendencia> findAllByCpf(Long cpf);
 

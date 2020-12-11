@@ -3,12 +3,14 @@ package com.educandoweb.couse.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcionario;
@@ -18,6 +20,7 @@ import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
+import com.educandoweb.couse.services.exceptions.ViolationException;
 
 @Service
 public class ComiteService {
@@ -59,20 +62,37 @@ public class ComiteService {
 	
 	public boolean atualizarFotoComite(Comite obj) {
 		try {
-			System.out.println("entrou 1");
 		Comite entity = repository.getOne(obj.getId());
 		entity.toString();
-		System.out.println("entrou 2");
 		entity.setUrlFoto(obj.getUrlFoto());
-		System.out.println("entrou 3");
-		System.out.println(obj.getId());
-		System.out.println(obj.getUrlFoto());
-		System.out.println(entity.toString());
 		repository.save(entity);
-		System.out.println("entrou 4");
 		return true;
 		} catch (RuntimeException e) {
 			throw new ErroNaoMapeadoException("Erro não mapeado na aprovação de funcionarios.");
 		}
 	}
+	
+	public Comite atualizarComite(Comite obj) {
+		try {
+
+			Comite entity = repository.findById((long) obj.getId());
+			entity.setComite(obj.getComite());
+			entity.setDescricao(obj.getDescricao());
+			entity.setDataCriacao(obj.getDataCriacao());
+			
+			return repository.save(entity);
+
+		} catch (TransactionSystemException e) {
+
+			throw new ViolationException("Existem campos vazios!", null);
+
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(
+					"O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
+		}
+	}
+
 }
