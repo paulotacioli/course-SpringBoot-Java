@@ -89,7 +89,7 @@ public class FuncionarioResouce {
 		return ResponseEntity.ok().body(obj);
 	 
 	}
-
+	
 }
 
 

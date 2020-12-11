@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.Pendencia;
 import com.educandoweb.couse.entities.Skills;
 import com.educandoweb.couse.services.SkillsService;
 
@@ -49,5 +50,16 @@ public class SkillsResouce {
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping (value = "/funcionario")
+	public ResponseEntity<List<Skills>> filtrar (@RequestBody Funcionario obj){
+		System.out.println(obj.toString());
+		List<Skills> listaSkills = service.findSkillsByFuncionario(obj);
+		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				  .buildAndExpand(obj.getClass()).toUri();
+		return ResponseEntity.created(uri).body(listaSkills);
 	}
 }

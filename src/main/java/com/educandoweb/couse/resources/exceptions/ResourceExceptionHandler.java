@@ -77,7 +77,7 @@ public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(ErroNaoMapeadoException.class)
 	public ResponseEntity<StandardError> ErroNaoMapeadoException(ErroNaoMapeadoException e, HttpServletRequest request){
-		String error = "Erro não mapeado. Favor tentar mais tarde, em caso de persistencia contatar a equipe de TI.";
+		String error = "----------------------------------------------------------------------";
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		StandardError err = new StandardError (Instant.now(), status.value(), error, e.getMessage(), error);
 		return ResponseEntity.status(status).body(err);

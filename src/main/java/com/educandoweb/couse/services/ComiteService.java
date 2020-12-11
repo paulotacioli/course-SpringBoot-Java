@@ -91,7 +91,7 @@ public class ComiteService {
 					"O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
-			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
+			throw new ErroNaoMapeadoException("Erro nao mapeado.");
 		}
 	}
 

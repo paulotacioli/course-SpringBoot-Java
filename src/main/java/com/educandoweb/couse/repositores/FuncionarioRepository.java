@@ -16,5 +16,5 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	List<Pendencia> findAllByCpf(Long cpf);
 
 	List<Funcionario> findAllByAprovado(int aprovado);
-	
+
 }
