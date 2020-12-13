@@ -388,4 +388,45 @@ public class FuncionarioService {
 
 	}
 	
+	public List<Funcionario> filterFuncionario(Funcionario obj) {
+		long maxComite = 1000;
+		long minComite = 0;
+		
+		long maxRegiao = 100000;
+		long minRegiao = 0;
+		
+		long maxFuncao = 1000;
+		long minFuncao = 0;
+		
+		long maxSkill = 1000;
+		long minSkill = 0;
+
+		
+		if (obj.getComite() != null) {
+			maxComite = obj.getComite().getId() +1;
+			minComite = obj.getComite().getId() -1;
+		}
+		
+		if (obj.getRegiao() != null) {
+			maxRegiao = obj.getRegiao().getId() +1;
+			minRegiao = obj.getRegiao().getId() -1;
+		}
+		
+		if (obj.getFuncao() != null) {
+			maxFuncao = obj.getFuncao().getId() +1;
+			minFuncao = obj.getFuncao().getId() -1;
+		}
+		
+		if (obj.getSkill() != null) {
+			maxSkill = obj.getSkill().iterator().next().getId() +1;
+			minSkill = obj.getSkill().iterator().next().getId() -1;
+		}
+		
+		List<Funcionario> objFuncionario = repository.findAllByComite_IdGreaterThanAndComite_IdLessThanAndRegiao_IdGreaterThanAndRegiao_IdLessThanAndFuncao_IdGreaterThanAndFuncao_IdLessThanAndSkill_IdGreaterThanAndSkill_IdLessThan(minComite, maxComite, minRegiao, maxRegiao, minFuncao, maxFuncao, minSkill, maxSkill);
+		
+		//List<Funcionario> objFuncionario = repository.findAllBySkillInAndFuncaoAndRegiaoAndAprovadoAndCpfAndComite(obj.getSkill(), obj.getFuncao(), obj.getRegiao(), obj.getAprovado(), obj.getCpf(), obj.getComite());
+		return objFuncionario;
+	}
+	
+	
 }

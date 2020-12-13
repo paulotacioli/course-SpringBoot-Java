@@ -55,8 +55,5 @@ public class SkillsService {
 		}
 	}
 	
-	public List<Skills> findSkillsByFuncionario(Funcionario obj) {
-		List<Skills> objSkills = repository.findAllByFuncionario(obj);
-		return objSkills;
-	}
+
 }

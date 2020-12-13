@@ -90,6 +90,16 @@ public class FuncionarioResouce {
 	 
 	}
 	
+	@PostMapping (value = "/filtrar")
+	public ResponseEntity<List<Funcionario>> filterFuncionario (@RequestBody Funcionario obj){
+		System.out.println(obj.toString());
+		List<Funcionario> listaFuncionario = service.filterFuncionario(obj);
+		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				  .buildAndExpand(obj.getClass()).toUri();
+		return ResponseEntity.created(uri).body(listaFuncionario);
+	}
 }
 
 

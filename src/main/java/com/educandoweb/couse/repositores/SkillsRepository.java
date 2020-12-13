@@ -14,4 +14,6 @@ public interface SkillsRepository extends JpaRepository<Skills, Long>{
 
 	List<Skills> findAllByFuncionario(Funcionario obj);
 
+
+
 }
