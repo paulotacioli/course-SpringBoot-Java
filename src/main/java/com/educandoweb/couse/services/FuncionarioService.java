@@ -429,4 +429,15 @@ public class FuncionarioService {
 	}
 	
 	
+	public List<Funcionario> ordenarFuncionarios() {
+		try {
+			List<Funcionario> obj = repository.findAllByOrderByNomeAsc();
+			return obj;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 }

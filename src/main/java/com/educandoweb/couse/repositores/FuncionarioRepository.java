@@ -30,4 +30,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 			long minComite, long maxComite, long minRegiao, long maxRegiao, long minFuncao, long maxFuncao,
 			long minSkill, long maxSkill);
 
+	List<Funcionario> findAllByOrderByNomeAsc();
+
 }

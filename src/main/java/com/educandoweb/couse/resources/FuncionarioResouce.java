@@ -100,6 +100,10 @@ public class FuncionarioResouce {
 				  .buildAndExpand(obj.getClass()).toUri();
 		return ResponseEntity.created(uri).body(listaFuncionario);
 	}
+	
+	@GetMapping(value = "/ordenar")
+	public ResponseEntity<List<Funcionario>> ordenarFuncionarios(){
+		List<Funcionario> list = service.ordenarFuncionarios();
+		return ResponseEntity.ok().body(list);
+	}
 }
-
-
