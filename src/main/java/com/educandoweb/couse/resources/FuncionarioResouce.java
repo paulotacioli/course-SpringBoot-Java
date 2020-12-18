@@ -101,9 +101,21 @@ public class FuncionarioResouce {
 		return ResponseEntity.created(uri).body(listaFuncionario);
 	}
 	
-	@GetMapping(value = "/ordenar")
-	public ResponseEntity<List<Funcionario>> ordenarFuncionarios(){
-		List<Funcionario> list = service.ordenarFuncionarios();
+	@GetMapping(value = "/ordenar-alfabetica")
+	public ResponseEntity<List<Funcionario>> ordenarFuncionariosAlfabetica(){
+		List<Funcionario> list = service.ordenarFuncionariosAlfabetica();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/ordenar-integracao")
+	public ResponseEntity<List<Funcionario>> ordenarFuncionariosDataIntegracao(){
+		List<Funcionario> list = service.ordenarFuncionariosDataIntegracao();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/reprovados")
+	public ResponseEntity<List<Funcionario>> findReprovados(){
+		List<Funcionario> list = service.findReprovados();
 		return ResponseEntity.ok().body(list);
 	}
 }

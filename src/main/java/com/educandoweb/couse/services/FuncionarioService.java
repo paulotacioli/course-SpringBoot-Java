@@ -429,9 +429,34 @@ public class FuncionarioService {
 	}
 	
 	
-	public List<Funcionario> ordenarFuncionarios() {
+	public List<Funcionario> ordenarFuncionariosAlfabetica() {
 		try {
 			List<Funcionario> obj = repository.findAllByOrderByNomeAsc();
+			return obj;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	
+	
+	
+	public List<Funcionario> ordenarFuncionariosDataIntegracao() {
+		try {
+			List<Funcionario> obj = repository.findAllByOrderByDataIntegracaoAsc();
+			return obj;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	public List<Funcionario> findReprovados() {
+		try {
+			List<Funcionario> obj = repository.findAllByAprovado(3);
 			return obj;
 		} catch (RuntimeException e) {
 			e.printStackTrace();

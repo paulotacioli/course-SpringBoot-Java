@@ -32,4 +32,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
 	List<Funcionario> findAllByOrderByNomeAsc();
 
+	List<Funcionario> findAllByOrderByDataIntegracaoAsc();
+
 }
