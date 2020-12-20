@@ -66,14 +66,14 @@ public class LoginService implements UserDetailsService {
 		    if (login != null) {
 		      builder = org.springframework.security.core.userdetails.User.withUsername(username);
 		      builder.password(login.getSenha());
-		      if(login.getAprovado() == 4) {
+		      if(login.getAprovado() == 2 && login.getFuncionario().getCoordenador() == 1) {
 			      builder.roles("COORDENADOR");
 		      } else if (login.getAprovado() == 8) {
 		    	  builder.roles("ADMINISTRADOR");
-		      } else if (login.getAprovado() == 2) {
+		      } else if (login.getAprovado() == 1 && login.getFuncionario().getCoordenador() == 0) {
 		    	  builder.roles("FUNCIONARIO"); 
-		      } else if (login.getAprovado() == 1) {
-			    	  builder.roles("RECUSADO"); 
+		      } else if (login.getAprovado() == 3) {
+			    	  builder.roles("REPROVADO"); 
 		      } else {
 		    	  builder.roles("PENDENTE");
 		      }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -205,7 +206,7 @@ public class FuncionarioService {
 	}
 
 
-	public boolean inserirHierarquia(Funcionario obj) {
+	public boolean inserirHierarquia(Funcionario obj) throws Exception, FalhaPermissaoHierarquiaException, JaTemCoordenadorHierarquiaException {
 		try{
 			System.out.println('1');
 
@@ -316,14 +317,16 @@ public class FuncionarioService {
 			throw new FalhaPermissaoHierarquiaException();
 		}
 		} catch (FalhaPermissaoHierarquiaException e) {
+			
 			throw new FalhaPermissaoHierarquiaException();
-
+			
 		} catch (JaTemCoordenadorHierarquiaException e) {
+			System.out.println("entrou no erro e tal");
 			throw new JaTemCoordenadorHierarquiaException();
 		}
 
 	}
-
+	@Transactional(rollbackOn={Exception.class})
 	public List<Funcionario> aprovarFuncionarios(List<Funcionario> obj) {
 		
 		
@@ -369,10 +372,12 @@ public class FuncionarioService {
 		} catch (FalhaPermissaoHierarquiaException e) {
 			throw new FalhaPermissaoHierarquiaException();
 		} catch (JaTemCoordenadorHierarquiaException e) {
+			System.out.println("entrou aqui n2");
 			throw new JaTemCoordenadorHierarquiaException();
-
-		} catch (RuntimeException e) {
-			throw new ErroNaoMapeadoException("Erro não mapeado na aprovação de funcionarios.");
+			
+		}catch (Exception e) {
+			throw new ErroNaoMapeadoException("");
+			
 		}
 		return obj;
 	}

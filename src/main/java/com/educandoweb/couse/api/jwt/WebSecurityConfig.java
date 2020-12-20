@@ -74,12 +74,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 // dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/comites", "/funcionarios", "/authenticate", 
-						"/pendencias", "/regioes", "/funcoes", "/skills")
-				.permitAll()
+				.antMatchers(HttpMethod.POST, "/comites")
+//				.permitAll()
 //				.antMatchers(HttpMethod.POST, "/skills")
-//				.hasAuthority("ROLE_ADMINISTRADOR")
+				.hasAuthority("ROLE_ADMINISTRADOR")
+
+				.antMatchers(HttpMethod.POST, "/pendentes/aprovar")
+				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
 				.and()
+				
 //				.antMatchers(HttpMethod.GET, "/comites", "/funcionarios", "/authenticate", 
 //						"/pendencias", "/regioes", "/skills", "/funcoes")
 //				.permitAll()
