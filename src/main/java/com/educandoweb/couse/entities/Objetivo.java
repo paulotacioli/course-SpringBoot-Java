@@ -41,7 +41,7 @@ public class Objetivo implements Serializable {
 	@JoinColumn(name = "comite_id")
 	private Comite comite;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "objetivo")
 
 	private List<Acao> acao = new ArrayList<>();
