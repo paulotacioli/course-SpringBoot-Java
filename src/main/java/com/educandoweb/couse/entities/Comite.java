@@ -57,7 +57,7 @@ public class Comite implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "comite")
-
+@JsonIgnore
 	private List<Objetivo> objetivo = new ArrayList<>();
 	
 	
