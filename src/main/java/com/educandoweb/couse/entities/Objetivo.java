@@ -38,6 +38,7 @@ public class Objetivo implements Serializable {
 	
 	@ManyToOne
 @JsonIgnore
+		@JoinColumn(name = "comite_id")
 	private Comite comite;
 
 	
