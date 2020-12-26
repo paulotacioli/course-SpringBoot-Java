@@ -16,5 +16,6 @@ public interface HierarquiaRepository extends JpaRepository<Hierarquia, Long>{
 	List<Hierarquia> findAllByFuncionario (Long funcionario);
 
 	List<Hierarquia> findAllByComiteAndRelacionamento(Long comite, char relacionamento);
-	
+
+
 }

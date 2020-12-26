@@ -8,4 +8,5 @@ public interface ComiteRepository extends JpaRepository<Comite, Long>{
 
 	Comite findById(long id);
 
+
 }

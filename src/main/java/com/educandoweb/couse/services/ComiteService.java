@@ -14,6 +14,8 @@ import org.springframework.transaction.TransactionSystemException;
 
 import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.Hierarquia;
+import com.educandoweb.couse.entities.Time;
 import com.educandoweb.couse.repositores.ComiteRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
@@ -96,5 +98,6 @@ public class ComiteService {
 			throw new ErroNaoMapeadoException("Erro não mapeado. Favor tentar mais tarde, em caso de persistencia contatar a equipe de TI.");
 		}
 	}
+	
 
 }

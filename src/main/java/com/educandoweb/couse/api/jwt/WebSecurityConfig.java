@@ -74,32 +74,60 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 // dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/comites")
+				.antMatchers(HttpMethod.POST, "/comites", "/funcoes", "/skills")
 //				.permitAll()
 //				.antMatchers(HttpMethod.POST, "/skills")
 				.hasAuthority("ROLE_ADMINISTRADOR")
 
-				.antMatchers(HttpMethod.POST, "/pendentes/aprovar")
+				.antMatchers(HttpMethod.POST, "/pendencias")
+				
+				.hasAnyAuthority("ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
+				
+				.antMatchers(HttpMethod.POST, "funcionarios/pendentes/aprovar", "funcionarios/filtrar", 
+						"/objetivos")
+				
 				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
+				
+				.antMatchers(HttpMethod.POST, "/pendencias/funcionario", "/authenticate")
+				
+				.permitAll()
+//				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
+				
+				.antMatchers(HttpMethod.GET, "/funcionarios/ordenar-alfabetica", "/funcionarios/ordenar-integracao", 
+						"regioes/cidade/{estado}", "/skills", "/acoes", "/authenticate")
+				
+				.permitAll()
+//				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
+				
+				.antMatchers(HttpMethod.GET, "/funcionarios/reprovados", "/funcionarios/pendentes", "/hierarquias/encontrar-time{cpf}", 
+						"/hierarquias/encontrar-lider/{cpf}")
+				
+				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
+				
+				.antMatchers(HttpMethod.PUT, "/funcionarios/atualizar-foto", "/funcionarios/atualizar-dados",
+						"/funcionarios/atualizar-curriculo", "/funcionarios/atualizar-skills")
+				
+				.hasAuthority( "ROLE_FUNCIONARIO")
+				
+				.antMatchers(HttpMethod.PUT, "/comites/atualizar-foto", "/comites/atualizar-dados", "/comites")
+				
+				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
+				
+				.antMatchers(HttpMethod.DELETE, "/comites", "/funcoes", "/skills")
+				
+				.hasAuthority("ROLE_ADMINISTRADOR")
+				
+				.antMatchers(HttpMethod.DELETE, "/objetivos")
+				
+				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
+				
+				.antMatchers(HttpMethod.DELETE, "/pendencias")
+				
+				.hasAnyAuthority("ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
+				
 				.and()
 				
-//				.antMatchers(HttpMethod.GET, "/comites", "/funcionarios", "/authenticate", 
-//						"/pendencias", "/regioes", "/skills", "/funcoes")
-//				.permitAll()
-//
-//				.antMatchers(HttpMethod.PUT, "/comites", "/funcionarios", "/authenticate", 
-//						"/pendencias", "/regioes", "/skills", "/funcoes")
-//				.permitAll().and()
 
-				/*
-				 * .antMatchers(HttpMethod.POST, "/authenticate","/corretores",
-				 * "/anuncios/filtrar", "/diretorios").permitAll() .antMatchers(HttpMethod.GET,
-				 * "/anuncios", "/diretorios").permitAll()
-				 * .antMatchers(HttpMethod.POST,"/proprietarios", "/anuncios",
-				 * "/localizacao").authenticated() .antMatchers(HttpMethod.POST,
-				 * "/*").hasAuthority("ROLE_ADMIN").and() .antMatchers(HttpMethod.POST,
-				 * "/motorista", "/transportadora").permitAll()
-				 */
 
 // make sure we use stateless session; session won't be used to
 // store user's state.

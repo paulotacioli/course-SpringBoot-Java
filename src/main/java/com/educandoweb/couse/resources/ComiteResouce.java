@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.Time;
 import com.educandoweb.couse.services.ComiteService;
 
 @RestController

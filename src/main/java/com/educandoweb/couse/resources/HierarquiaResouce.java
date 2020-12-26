@@ -38,4 +38,16 @@ public class HierarquiaResouce {
 		List<Time> time = service.encontrarTime(cpf);
 		return ResponseEntity.ok().body(time);
 	}
+
+	@GetMapping (value = "/encontrar-chefe/{id}")
+	public ResponseEntity<Time> encontrarCoordenador (@PathVariable Long id){
+		Time coordenador = service.encontrarCoordenador(id);
+		return ResponseEntity.ok().body(coordenador);
+	}
+	
+//	@GetMapping (value = "/encontrar-integrantes/{id}")
+//	public ResponseEntity<List<Time>> encontrarIntegrantes (@PathVariable Long id){
+//		List<Time> integrantes = service.encontrarIntegrantes(id);
+//		return ResponseEntity.ok().body(integrantes);
+//	}
 }

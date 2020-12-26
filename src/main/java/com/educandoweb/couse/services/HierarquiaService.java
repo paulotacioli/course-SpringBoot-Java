@@ -100,5 +100,66 @@ public class HierarquiaService {
 
 		return timeLista;
 	}
+	
+	public Time encontrarCoordenador(Long id) {
+		Funcionario objFunc = new Funcionario();
+		Hierarquia objNovo = new Hierarquia();
+		if ((objNovo = repository.findByComiteAndRelacionamento(id, 'c')) != null) {
+			try {
+				System.out.println("imprmir o cpf do chefe: " + objNovo.getFuncionario());
+				objFunc = funcionarioRepository.findByCpf(objNovo.getFuncionario());
+				Time objTime = new Time();
+				objTime.setCpf(objNovo.getFuncionario());
+
+				objTime.setNome(objFunc.getNome());
+
+				return objTime;
+
+			} catch (NullPointerException e) {
+				throw new ResourceNotFoundException(e);
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	
+	
+//	public List<Time> encontrarIntegrantes(Long id) {
+//		Funcionario objFunc = new Funcionario();
+//		Hierarquia objNovo = new Hierarquia();
+//			try {
+//				List<Hierarquia> list = new ArrayList<Hierarquia>();
+//				list = repository.findAllByComiteAndRelacionamento(id, 's');
+//				System.out.println("achou subordinados do comite");
+//				objFunc = funcionarioRepository.findByCpf(objNovo.getFuncionario());
+//			
+//				List<Time> timeLista = new ArrayList<Time>();
+//				for (Hierarquia objAtual : list) {
+//					System.out.println("entrou no for");
+//					Time objTime = new Time();
+//					System.out.println("chegou 1");
+//					objTime.setCpf(objAtual.getFuncionario());
+//
+//					System.out.println("chegou 2");
+//					objTime.setNome(funcionarioRepository.findByCpf(objAtual.getFuncionario()).getNome());
+//
+//					System.out.println("chegou 3");
+//					if (!objFunc.toString().equals(objAtual.getFuncionario().toString())) { //DEU ERRO NESSA LINHA (VER DAQUI A POUCO)
+//
+//						System.out.println("chegou 4");
+//						timeLista.add(objTime);
+//
+//						System.out.println("chegou 5");
+//					}
+//				}
+//				System.out.println("saiu do for");
+//				return timeLista;
+//				
+//			} catch (RuntimeException e) {
+//				throw new CampoVazioException();
+////				return null;
+//			}
+//	}
 
 }
