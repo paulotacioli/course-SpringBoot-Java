@@ -38,7 +38,7 @@ public class Objetivo implements Serializable {
 	
 	@ManyToOne
 
-	@JoinColumn(name = "comite_id")
+		@JoinColumn(name = "comite_id")
 	private Comite comite;
 
 	
