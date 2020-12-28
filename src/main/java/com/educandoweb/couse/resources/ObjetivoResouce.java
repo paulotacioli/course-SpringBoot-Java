@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Objetivo;
 import com.educandoweb.couse.services.ObjetivoService;
 
@@ -47,5 +48,11 @@ public class ObjetivoResouce {
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/comite/{id}")
+	public ResponseEntity<List<Objetivo>> listarObjetivos(@PathVariable Long id){
+		List<Objetivo> obj = service.listarObjetivos(id);
+		return ResponseEntity.ok().body(obj);
 	}
 }

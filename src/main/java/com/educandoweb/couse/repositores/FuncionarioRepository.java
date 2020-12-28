@@ -34,4 +34,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
 	List<Funcionario> findAllByOrderByDataIntegracaoAsc();
 
+	Comite findByComite(Long id);
+
 }

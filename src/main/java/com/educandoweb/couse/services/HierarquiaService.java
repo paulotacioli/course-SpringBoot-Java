@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
 import com.educandoweb.couse.entities.Time;
@@ -131,9 +132,8 @@ public class HierarquiaService {
 //			try {
 //				List<Hierarquia> list = new ArrayList<Hierarquia>();
 //				list = repository.findAllByComiteAndRelacionamento(id, 's');
-//				System.out.println("achou subordinados do comite");
-//				objFunc = funcionarioRepository.findByCpf(objNovo.getFuncionario());
-//			
+//				objFunc = repository.findByCpf(list.getFuncionario());
+//				
 //				List<Time> timeLista = new ArrayList<Time>();
 //				for (Hierarquia objAtual : list) {
 //					System.out.println("entrou no for");
@@ -143,23 +143,16 @@ public class HierarquiaService {
 //
 //					System.out.println("chegou 2");
 //					objTime.setNome(funcionarioRepository.findByCpf(objAtual.getFuncionario()).getNome());
-//
+//					timeLista.add(objTime);
+//					
 //					System.out.println("chegou 3");
-//					if (!objFunc.toString().equals(objAtual.getFuncionario().toString())) { //DEU ERRO NESSA LINHA (VER DAQUI A POUCO)
-//
-//						System.out.println("chegou 4");
-//						timeLista.add(objTime);
-//
-//						System.out.println("chegou 5");
-//					}
 //				}
+//				
 //				System.out.println("saiu do for");
 //				return timeLista;
 //				
 //			} catch (RuntimeException e) {
 //				throw new CampoVazioException();
-////				return null;
 //			}
 //	}
-
 }

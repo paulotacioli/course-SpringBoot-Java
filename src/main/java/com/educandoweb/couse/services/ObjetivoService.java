@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Acao;
+import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Objetivo;
 import com.educandoweb.couse.repositores.AcaoRepository;
 import com.educandoweb.couse.repositores.ObjetivoRepository;
@@ -69,5 +70,10 @@ public class ObjetivoService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
+	}
+	
+	public List<Objetivo> listarObjetivos(Long id) {
+		List<Objetivo> obj = repository.findAllByComite_Id(id);
+		return obj;
 	}
 }
