@@ -48,7 +48,7 @@ public class Acao implements Serializable {
 
 	
 	@ManyToOne
-
+@JsonIgnore
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
 	
@@ -57,8 +57,6 @@ public class Acao implements Serializable {
 	@JsonIgnore
 	@JoinColumn(name = "objetivo_id")
 	private Objetivo objetivo;
-	
-
 	
 	
 	

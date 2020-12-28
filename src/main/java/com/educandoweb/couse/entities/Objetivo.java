@@ -43,7 +43,6 @@ public class Objetivo implements Serializable {
 
 	
 	@OneToMany(mappedBy = "objetivo")
-
 	private List<Acao> acao = new ArrayList<>();
 
 

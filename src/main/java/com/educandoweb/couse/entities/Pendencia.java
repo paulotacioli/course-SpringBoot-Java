@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_pendencia")
@@ -29,6 +30,9 @@ public class Pendencia implements Serializable{
 	@Column(length = 5000)
 	@NotEmpty
 	private String descricao;
+	
+	@NotEmpty
+	private char status;
 	
 	@NotEmpty
 	private String dataCriacao = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
@@ -101,6 +105,16 @@ public class Pendencia implements Serializable{
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+
+	public char getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(char status) {
+		this.status = status;
 	}
 
 

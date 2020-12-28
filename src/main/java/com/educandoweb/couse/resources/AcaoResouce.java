@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Acao;
+import com.educandoweb.couse.entities.Objetivo;
 import com.educandoweb.couse.services.AcaoService;
 
 @RestController
@@ -47,5 +48,11 @@ public class AcaoResouce {
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/objetivo/{id}")
+	public ResponseEntity<List<Acao>> listarAcoes(@PathVariable Long id){
+		List<Acao> obj = service.listarAcoes(id);
+		return ResponseEntity.ok().body(obj);
 	}
 }

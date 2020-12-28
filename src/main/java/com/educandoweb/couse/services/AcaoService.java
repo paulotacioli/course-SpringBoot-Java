@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.couse.entities.Acao;
+import com.educandoweb.couse.entities.Objetivo;
 import com.educandoweb.couse.repositores.AcaoRepository;
 import com.educandoweb.couse.services.exceptions.CampoJaExisteException;
 import com.educandoweb.couse.services.exceptions.CampoVazioException;
@@ -53,5 +54,12 @@ public class AcaoService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
+	}
+	
+	
+	
+	public List<Acao> listarAcoes(Long id) {
+		List<Acao> obj = repository.findAllByObjetivo_Id(id);
+		return obj;
 	}
 }

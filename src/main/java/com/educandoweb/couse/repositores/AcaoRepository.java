@@ -10,6 +10,8 @@ import com.educandoweb.couse.entities.Objetivo;
 public interface AcaoRepository extends JpaRepository<Acao, Long>{
 	
 	List<Acao> findAllByObjetivo (Objetivo id);
+
+	List<Acao> findAllByObjetivo_Id(Long id);
 }
 
 
