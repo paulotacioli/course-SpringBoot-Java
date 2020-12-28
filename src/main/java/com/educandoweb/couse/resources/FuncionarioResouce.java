@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.FuncionarioPesquisa;
 import com.educandoweb.couse.services.FuncionarioService;
 
 @RestController
@@ -117,5 +118,16 @@ public class FuncionarioResouce {
 	public ResponseEntity<List<Funcionario>> findReprovados(){
 		List<Funcionario> list = service.findReprovados();
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@PostMapping (value = "/encontrar")
+	public ResponseEntity<List<FuncionarioPesquisa>> encontrarFuncionarioPorNomeOuCpf (@RequestBody Funcionario obj){
+		System.out.println(obj.toString());
+		List<FuncionarioPesquisa> listaFuncionario = service.encontrarFuncionarioPorNomeOuCpf(obj);
+		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				  .buildAndExpand(obj.getClass()).toUri();
+		return ResponseEntity.created(uri).body(listaFuncionario);
 	}
 }

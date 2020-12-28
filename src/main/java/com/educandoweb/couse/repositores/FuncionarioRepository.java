@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcao;
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.FuncionarioPesquisa;
 import com.educandoweb.couse.entities.Pendencia;
 import com.educandoweb.couse.entities.Regiao;
 import com.educandoweb.couse.entities.Skills;
@@ -35,5 +36,10 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	List<Funcionario> findAllByOrderByDataIntegracaoAsc();
 
 	Comite findByComite(Long id);
+
+
+	List<FuncionarioPesquisa> findAllProjectedByNomeContainingIgnoreCase(String nome);
+
+	List<FuncionarioPesquisa> findAllProjectedByCpfContaining(String cpf);
 
 }

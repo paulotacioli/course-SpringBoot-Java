@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
 import com.educandoweb.couse.entities.Funcionario;
+import com.educandoweb.couse.entities.FuncionarioPesquisa;
 import com.educandoweb.couse.entities.Hierarquia;
 import com.educandoweb.couse.entities.Login;
 import com.educandoweb.couse.repositores.FuncionarioRepository;
@@ -469,5 +470,11 @@ public class FuncionarioService {
 		return null;
 
 	}
-	
+
+	public List<FuncionarioPesquisa> encontrarFuncionarioPorNomeOuCpf(Funcionario obj) {
+		
+		List<FuncionarioPesquisa> objResultado = repository.findAllProjectedByNomeContainingIgnoreCase(obj.getNome());
+
+			return objResultado;
+	}
 }
