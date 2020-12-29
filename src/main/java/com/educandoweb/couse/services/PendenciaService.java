@@ -67,27 +67,15 @@ public class PendenciaService {
 	
 	
 	
-	public boolean atualizarStatus(Pendencia obj) {
+	public Pendencia atualizarStatus(Pendencia obj) {
 		try {
 
 			Pendencia entity = pendenciaRepository.getOne(obj.getId());
 			entity.setStatus(obj.getStatus());
-			if (obj.getStatus() == (char) 'c') {
-				pendenciaRepository.save(entity);
-				return true;
-				
-				
-			} else if (obj.getStatus() == (char) 'p') {
-				pendenciaRepository.save(entity);
-				return true;
-				
+	
+			return pendenciaRepository.save(entity);
 			
-			} else {
-				return false;
-				
-			}
-			
-			
+	
 		} catch (TransactionSystemException e) {
 
 			throw new ViolationException("Existem campos vazios!", null);

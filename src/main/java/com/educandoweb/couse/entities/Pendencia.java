@@ -31,7 +31,7 @@ public class Pendencia implements Serializable{
 	@NotEmpty
 	private String descricao;
 	
-	@NotEmpty
+	@NotNull
 	private char status;
 	
 	@NotEmpty

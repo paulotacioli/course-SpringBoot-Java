@@ -13,14 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_objetivo", uniqueConstraints=
-@UniqueConstraint(columnNames={"titulo"}))
+@Table(name = "tb_objetivo")
 
 public class Objetivo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -43,8 +41,8 @@ public class Objetivo implements Serializable {
 
 	
 	@OneToMany(mappedBy = "objetivo")
+	@JsonIgnore
 	private List<Acao> acao = new ArrayList<>();
-
 
 	
 	public Objetivo() {

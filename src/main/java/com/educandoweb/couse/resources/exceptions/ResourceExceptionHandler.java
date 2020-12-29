@@ -14,6 +14,7 @@ import com.educandoweb.couse.services.exceptions.CampoVazioException;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.FalhaPermissaoHierarquiaException;
+import com.educandoweb.couse.services.exceptions.FuncionarioJaDesligadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioNegadoException;
 import com.educandoweb.couse.services.exceptions.FuncionarioPendenteAprovacaoException;
 import com.educandoweb.couse.services.exceptions.JaTemCoordenadorHierarquiaException;
@@ -141,6 +142,14 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> FalhaPermissaoHierarquiaException(FalhaPermissaoHierarquiaException e, HttpServletRequest request){
 		String error = "Sem permissão para atualizar a hierarquia do funcionario!";
 		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(FuncionarioJaDesligadoException.class)
+	public ResponseEntity<StandardError> FuncionarioJaDesligadoException(FuncionarioJaDesligadoException e, HttpServletRequest request){
+		String error = "Recurso ja apagado!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}

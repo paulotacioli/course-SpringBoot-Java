@@ -26,6 +26,7 @@ import com.educandoweb.couse.repositores.PendenciaRepository;
 import com.educandoweb.couse.services.exceptions.DatabaseException;
 import com.educandoweb.couse.services.exceptions.ErroNaoMapeadoException;
 import com.educandoweb.couse.services.exceptions.FalhaPermissaoHierarquiaException;
+import com.educandoweb.couse.services.exceptions.FuncionarioJaDesligadoException;
 import com.educandoweb.couse.services.exceptions.JaTemCoordenadorHierarquiaException;
 import com.educandoweb.couse.services.exceptions.ReferenciaInexistenteException;
 import com.educandoweb.couse.services.exceptions.ResourceNotFoundException;
@@ -126,7 +127,7 @@ public class FuncionarioService {
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage());
+			throw new FuncionarioJaDesligadoException(e.getMessage());
 		}
 	}
 	
@@ -206,6 +207,28 @@ public class FuncionarioService {
 		}
 	}
 
+	
+	public Funcionario atualizarFuncao(Funcionario obj) {
+		try {
+
+			Funcionario entity = repository.findByCpf(obj.getCpf());
+			entity.setFuncao(obj.getFuncao());
+
+			return repository.save(entity);
+			
+		} catch (TransactionSystemException e) {
+
+			throw new ViolationException("Existem campos vazios!", null);
+
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(
+					"O recurso a ser aprovado nao existe na base. Atualize a pagina e tente novamente.");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw new ErroNaoMapeadoException("Erro nao mapeado na aprovacao de funcionarios.");
+		}
+	}
+	
 
 	public boolean inserirHierarquia(Funcionario obj) throws Exception, FalhaPermissaoHierarquiaException, JaTemCoordenadorHierarquiaException {
 		try{

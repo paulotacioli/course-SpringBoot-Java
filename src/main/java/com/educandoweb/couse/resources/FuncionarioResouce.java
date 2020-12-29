@@ -91,6 +91,13 @@ public class FuncionarioResouce {
 	 
 	}
 	
+	@PutMapping(value = "/atualizar-funcao")
+	public ResponseEntity<Funcionario> atualizarFuncao (@RequestBody Funcionario obj){
+		obj = service.atualizarFuncao(obj);
+		return ResponseEntity.ok().body(obj);
+	 
+	}
+	
 	@PostMapping (value = "/filtrar")
 	public ResponseEntity<List<Funcionario>> filterFuncionario (@RequestBody Funcionario obj){
 		System.out.println(obj.toString());

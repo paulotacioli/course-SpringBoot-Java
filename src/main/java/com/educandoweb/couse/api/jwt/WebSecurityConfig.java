@@ -76,29 +76,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/comites", "/funcoes", "/skills")
 //				.permitAll()
-//				.antMatchers(HttpMethod.POST, "/skills")
+
 				.hasAuthority("ROLE_ADMINISTRADOR")
 
 				.antMatchers(HttpMethod.POST, "/pendencias")
 				
 				.hasAnyAuthority("ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
 				
-				.antMatchers(HttpMethod.POST, "funcionarios/pendentes/aprovar", "funcionarios/filtrar", 
-						"/objetivos")
+				.antMatchers(HttpMethod.POST, "funcionarios/pendentes/aprovar", "funcionarios/filtrar", "/objetivos")
 				
 				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
 				
-				.antMatchers(HttpMethod.POST, "/pendencias/funcionario", "/authenticate")
+				.antMatchers(HttpMethod.POST, "/pendencias/funcionario", "/funcionarios/encontrar", "/authenticate")
 				
 				.permitAll()
-//				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
 				
 				.antMatchers(HttpMethod.GET, "/funcionarios/ordenar-alfabetica", "/funcionarios/ordenar-integracao", 
-						"regioes/cidade/{estado}", "/skills", "/acoes", "/authenticate")
+						"regioes/cidade/{estado}", "/skills", "/funcoes", "/regioes", "/acoes", "/funcionarios", "/acoes/objetivo", "/authenticate")
 				
 				.permitAll()
-//				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR", "ROLE_FUNCIONARIO")
-				
+		
 				.antMatchers(HttpMethod.GET, "/funcionarios/reprovados", "/funcionarios/pendentes", "/hierarquias/encontrar-time{cpf}", 
 						"/hierarquias/encontrar-lider/{cpf}")
 				
@@ -107,7 +104,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.PUT, "/funcionarios/atualizar-foto", "/funcionarios/atualizar-dados",
 						"/funcionarios/atualizar-curriculo", "/funcionarios/atualizar-skills")
 				
-				.hasAuthority( "ROLE_FUNCIONARIO")
+				.hasAnyAuthority( "ROLE_FUNCIONARIO", "ROLE_COORDENADOR", "ROLE_ADMINISTRADOR")
+				
+				.antMatchers(HttpMethod.PUT, "/funcionarios/atualizar-funcao")
+				
+				.hasAnyAuthority("ROLE_FUNCIONARIO", "ROLE_COORDENADOR")
 				
 				.antMatchers(HttpMethod.PUT, "/comites/atualizar-foto", "/comites/atualizar-dados", "/comites")
 				
@@ -117,7 +118,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				
 				.hasAuthority("ROLE_ADMINISTRADOR")
 				
-				.antMatchers(HttpMethod.DELETE, "/objetivos")
+				.antMatchers(HttpMethod.DELETE, "/objetivos", "/funcionarios")
 				
 				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
 				

@@ -64,9 +64,10 @@ public class PendenciaResouce {
 	}
 	
 	
-	@PutMapping(value = "/status")
-	public boolean atualizarStatus (@RequestBody Pendencia obj){
-		return service.atualizarStatus(obj);
+	@PutMapping(value = "/atualizar-status")
+	public ResponseEntity<Pendencia> atualizarStatus (@RequestBody Pendencia obj){
+		obj = service.atualizarStatus(obj);
+		return ResponseEntity.ok().body(obj);
 	 
 	}
 }

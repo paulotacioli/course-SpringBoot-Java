@@ -84,11 +84,6 @@ public class Funcionario implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "skill_id")
     )
     private Set<Skills> skill = new HashSet<>();
-    
-    
-    @OneToMany(mappedBy = "funcionario")
-	@JsonIgnore
-	private List<Acao> acao = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "funcao_id")
