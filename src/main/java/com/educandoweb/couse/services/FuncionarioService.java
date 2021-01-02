@@ -501,4 +501,21 @@ public class FuncionarioService {
 
 			return objResultado;
 	}
+	
+	
+	
+	
+	public List<Funcionario> findPendentesPorCoordenador(Long cpf) {
+		try {
+			
+			Funcionario entity = repository.getOne(cpf);
+			
+			List<Funcionario> obj = repository.findAllByAprovadoAndComite(0, entity.getComite());
+			return obj;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 }

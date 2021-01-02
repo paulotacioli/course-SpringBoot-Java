@@ -137,4 +137,10 @@ public class FuncionarioResouce {
 				  .buildAndExpand(obj.getClass()).toUri();
 		return ResponseEntity.created(uri).body(listaFuncionario);
 	}
+	
+	@GetMapping(value = "/pendentes/{cpf}")
+	public ResponseEntity<List<Funcionario>> findPendentesPorCoordenador(@PathVariable Long cpf){
+		List<Funcionario> list = service.findPendentesPorCoordenador(cpf);
+		return ResponseEntity.ok().body(list);
+	}
 }

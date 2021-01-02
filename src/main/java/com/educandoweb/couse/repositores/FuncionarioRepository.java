@@ -41,5 +41,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	List<FuncionarioPesquisa> findAllProjectedByNomeContainingIgnoreCase(String nome);
 
 	List<FuncionarioPesquisa> findAllProjectedByCpfContaining(String cpf);
+	
+	
+	
+	List<Funcionario> findAllByAprovadoAndComite(int aprovado, Comite id);
 
 }
