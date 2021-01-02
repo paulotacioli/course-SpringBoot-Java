@@ -92,12 +92,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				
 				.antMatchers(HttpMethod.GET, "/funcionarios/ordenar-alfabetica", "/funcionarios/ordenar-integracao", 
-						"regioes/cidade/{estado}", "/skills", "/funcoes", "/regioes", "/acoes", "/funcionarios", "/acoes/objetivo", "/authenticate")
+						"regioes/cidade/{estado}", "/skills", "/funcoes", "/regioes", "/acoes", "/funcionarios", "/acoes/objetivo",
+						"/authenticate", "/comites")
 				
 				.permitAll()
 		
 				.antMatchers(HttpMethod.GET, "/funcionarios/reprovados", "/funcionarios/pendentes", "/hierarquias/encontrar-time{cpf}", 
-						"/hierarquias/encontrar-lider/{cpf}", "/comites")
+						"/hierarquias/encontrar-lider/{cpf}")
 				
 				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
 				
