@@ -11,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.educandoweb.couse.entities.Comite;
 import com.educandoweb.couse.entities.Funcionario;
 import com.educandoweb.couse.entities.Hierarquia;
 import com.educandoweb.couse.entities.Time;
@@ -126,33 +125,33 @@ public class HierarquiaService {
 	
 	
 	
-//	public List<Time> encontrarIntegrantes(Long id) {
-//		Funcionario objFunc = new Funcionario();
-//		Hierarquia objNovo = new Hierarquia();
-//			try {
-//				List<Hierarquia> list = new ArrayList<Hierarquia>();
-//				list = repository.findAllByComiteAndRelacionamento(id, 's');
-//				objFunc = repository.findByCpf(list.getFuncionario());
-//				
-//				List<Time> timeLista = new ArrayList<Time>();
-//				for (Hierarquia objAtual : list) {
-//					System.out.println("entrou no for");
-//					Time objTime = new Time();
-//					System.out.println("chegou 1");
-//					objTime.setCpf(objAtual.getFuncionario());
-//
-//					System.out.println("chegou 2");
-//					objTime.setNome(funcionarioRepository.findByCpf(objAtual.getFuncionario()).getNome());
-//					timeLista.add(objTime);
-//					
-//					System.out.println("chegou 3");
-//				}
-//				
-//				System.out.println("saiu do for");
-//				return timeLista;
-//				
-//			} catch (RuntimeException e) {
-//				throw new CampoVazioException();
-//			}
-//	}
+	public List<Time> encontrarIntegrantes(Long id) {
+	
+		Hierarquia objNovo = new Hierarquia();
+			try {
+				List<Hierarquia> list = new ArrayList<Hierarquia>();
+				list = repository.findAllByComiteAndRelacionamento(id, 's');
+				
+				List<Time> timeLista = new ArrayList<Time>();
+				for (Hierarquia objAtual : list) {
+					Funcionario objFunc = new Funcionario();
+					objFunc = funcionarioRepository.findByCpf(objAtual.getFuncionario());
+
+					Time objTime = new Time();
+				
+					objTime.setCpf(objAtual.getFuncionario());
+
+					objTime.setNome(funcionarioRepository.findByCpf(objAtual.getFuncionario()).getNome());
+					timeLista.add(objTime);
+					
+					System.out.println("chegou 3");
+				}
+				
+				System.out.println("saiu do for");
+				return timeLista;
+				
+			} catch (RuntimeException e) {
+				throw new CampoVazioException();
+			}
+	}
 }

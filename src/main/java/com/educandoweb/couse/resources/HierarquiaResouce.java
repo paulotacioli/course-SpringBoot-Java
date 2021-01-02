@@ -45,9 +45,9 @@ public class HierarquiaResouce {
 		return ResponseEntity.ok().body(coordenador);
 	}
 	
-//	@GetMapping (value = "/encontrar-integrantes/{id}")
-//	public ResponseEntity<List<Time>> encontrarIntegrantes (@PathVariable Long id){
-//		List<Time> integrantes = service.encontrarIntegrantes(id);
-//		return ResponseEntity.ok().body(integrantes);
-//	}
+	@GetMapping (value = "/encontrar-integrantes/{id}")
+	public ResponseEntity<List<Time>> encontrarIntegrantes (@PathVariable Long id){
+		List<Time> integrantes = service.encontrarIntegrantes(id);
+		return ResponseEntity.ok().body(integrantes);
+	}
 }
