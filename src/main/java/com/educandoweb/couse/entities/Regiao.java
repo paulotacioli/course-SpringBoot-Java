@@ -2,6 +2,7 @@ package com.educandoweb.couse.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -107,7 +108,4 @@ public class Regiao implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 }

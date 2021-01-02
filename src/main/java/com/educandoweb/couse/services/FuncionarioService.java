@@ -451,9 +451,10 @@ public class FuncionarioService {
 			minSkill = obj.getSkill().iterator().next().getId() -1;
 		}
 		
+		
+		
 		List<Funcionario> objFuncionario = repository.findAllByComite_IdGreaterThanAndComite_IdLessThanAndRegiao_IdGreaterThanAndRegiao_IdLessThanAndFuncao_IdGreaterThanAndFuncao_IdLessThanAndSkill_IdGreaterThanAndSkill_IdLessThan(minComite, maxComite, minRegiao, maxRegiao, minFuncao, maxFuncao, minSkill, maxSkill);
 		
-		//List<Funcionario> objFuncionario = repository.findAllBySkillInAndFuncaoAndRegiaoAndAprovadoAndCpfAndComite(obj.getSkill(), obj.getFuncao(), obj.getRegiao(), obj.getAprovado(), obj.getCpf(), obj.getComite());
 		return objFuncionario;
 	}
 	

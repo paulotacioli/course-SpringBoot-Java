@@ -97,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 		
 				.antMatchers(HttpMethod.GET, "/funcionarios/reprovados", "/funcionarios/pendentes", "/hierarquias/encontrar-time{cpf}", 
-						"/hierarquias/encontrar-lider/{cpf}")
+						"/hierarquias/encontrar-lider/{cpf}", "/comites")
 				
 				.hasAnyAuthority("ROLE_ADMINISTRADOR", "ROLE_COORDENADOR")
 				
